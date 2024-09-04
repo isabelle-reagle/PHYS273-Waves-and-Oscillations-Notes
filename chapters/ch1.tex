@@ -1,0 +1,102 @@
+\chapter{Chapter 1: Oscillations}
+\section{Simple Harmonic Motion}
+\subsection*{Mass on a Spring}
+Consider a mass $m$ laying on a frictionless flat plane attached to some spring with spring constant $k$. If the spring is at equilibrium at $x=0$ and the mass is given some small displacement $x_0$ and initial velocity $\dot x_0$, find the equations of motion.
+
+The force on the spring, the \textit{restoring force}, is described by Hooke's Law:
+\[ F = -kx \]
+and Newton's Second Law gives us the differential equation $m\ddot x + kx = 0$, that has the initial condition $x(0) = x_0$ and $\dot x(0) = \dot x_0$.
+
+This is a second order linear differential equation, which has the characteristic equation $mr^2 + k = 0$, which is solved by $r = i\sqrt{k/m}$, so the general solution is
+\[ x(t) = A\Re e^{i\sqrt{k/m}\, t} + B\Im e^{i\sqrt{k/m}\, t} = A\cos\pqty{\sqrt{\frac{k}{m}}t} + B\sin\pqty{\sqrt{\frac{k}{m}}t}\]
+If we define a quantity called the \textit{angular frequency} $\omega\equiv \sqrt{k/m}$, the equation of motion becomes $\ddot x + \omega^2 x = 0$ and the solution is
+\[ x(t) = A\cos(\omega t) + B\sin(\omega t) \]
+This gives $x(0) = A$ and $\dot x(0) = B\omega$. Plugging in the initial condition gives us
+\begin{equation}\label{superpos}
+    x(t) = x_0\cos(\omega t) + \frac{\dot x_0}{\omega }\sin(\omega t)
+\end{equation}
+This is a periodic function, so if the period is given by $T$, we have
+\[ \cos(\omega(t + T)) = \cos(\omega t) \]
+with an analogous equation for $\sin$. This implies $\omega (t + T) = \omega t + 2\pi$, so $T = 2\pi/\omega$.
+
+We also define a quantity $\nu = 1/T$, called the \textit{frequency}. This represents the number of revolutions per second.
+
+Using trigonometric properties, we may also write
+\[ x(t) = A\cos(\omega t + \phi) \]
+where $A$ is the amplitude and $\phi$ is the phase shift. Finding the amplitude for a given initial velocity and position is a simple exercise in the conservation of energy. At amplitude points, the kinetic energy $T\equiv \frac{1}{2}m\dot x^2$ is zero, and energy is conserved. Combining these facts along with the fact that the potential of a spring is $V = -\int F_x \dd  x = \frac{1}{2}kx^2$, we find
+\[ \frac{1}{2}kA^2 = \frac{1}{2}kx_0^2 + \frac{1}{2}m\dot x_0^2 \]
+or, rearranging,
+\begin{align}
+    A &= \sqrt{x_0^2 + \frac{m}{k}\dot x_0^2} \nonumber \\
+    &= \sqrt{x_0^2 + \frac{\dot x_0^2}{\omega^2}}
+\end{align}
+the phase shift can also be obtained by noting that
+\[ A\cos(\phi) = x_0 \quad\text{and}\quad -A\omega\sin(\phi) = \dot x_0\]
+and solving simultaneously. One special case to be aware of is that if $\dot x_0 =0$--that is, if we release the object from rest--we find $A = x_0$ and $\phi = 0$, so the equation of motion is simply
+\[ x(t) = x_0\cos(\omega t) \]
+A similar, yet less common case is when $x_0 = 0$. This corresponds to when we release the object from equilibrium with an initial velocity. In this case, we find $A = \dot x_0/\omega$ and $\phi = -\pi/2$, so
+\[ x(t) = \frac{\dot x_0}{\omega}\cos(\omega t - \pi/2) = \frac{\dot x_0}{\omega}\sin(\omega t)\]
+We may notice that the two equations we found for $x_0 = 0$ and $\dot x_0 = 0$ are exactly the two linearly independent solutions that comprise (\ref{superpos}). This tells us that we can understand the $\cos$ term as representing the contribution from the initial position/initial potential energy, and the $\sin$ term as representing the contribution from the initial velocity/initial kinetic energy.
+
+We can easily represent the potential and kinetic energies as functions of $t$ by plugging in $x(t)$ and $\dot x(t)$ to find
+\begin{align}
+    T &= \frac{1}{2}m\dot x^2 \nonumber \\ 
+    &= \frac{1}{2}m\omega^2 A^2\sin^2(\omega t + \phi)   \\
+    V &= \frac{1}{2}kx^2 \nonumber \\
+    &= \frac{1}{2}kA^2\cos^2(\omega t+\phi) \nonumber \\
+    &= \frac{1}{2}m\omega^2A^2\cos^2(\omega t + \phi) \quad\quad(\text{plugging in } k = m\omega^2 )
+\end{align}
+One important fact is that $T$ and $V$ are perfectly out of phase with each other, so when one is at a maximum, the other is at a minimum (zero in this case). We can also notice that the sum $E = T +V$ is constant at $E = \frac{1}{2}m\omega^2A^2$, as we expect.
+\subsection*{Simple Pendulum}
+Consider a pendulum of length $\ell$ swinging on a massless, frictionless string that forms an angle $\varphi$ with the vertical. 
+
+One way to analyze the motion of this pendulum is by considering its energy. The kinetic energy is given by $T = \frac{1}{2}mv^2 = \frac{1}{2}m\ell^2\dot \varphi^2$, and the potential energy (with $V = 0$ when the pendulum points down) is $V = mg\ell(1 - \cos\varphi)$. The total energy is their sum,
+\[ E = T+V = \frac{1}{2}m\ell\pqty{\ell\dot\varphi^2 + 2g(1-\cos\varphi)}\]
+Using the small-angle approximation $\cos\varphi \approx 1- \varphi^2/2$, we get
+\[ E = \frac{1}{2}m\ell(\ell \dot\varphi^2 + g\varphi^2)\]
+Because the energy is conserved, we know $\ell\dot\varphi^2 + g\varphi^2$ is constant, or
+\[ \dv{t} (\ell\dot\varphi^2 + g\varphi^2) = 2\ell \dot\varphi\ddot \varphi + 2g\varphi\dot\varphi = 0\]
+This simplifies to $\ell\ddot\varphi = -g\varphi$, which is exactly the equation for simple harmonic motion with angular frequency $\omega = \sqrt{g/\ell}$.
+\subsection*{Physical Pendulum}
+Consider a pendulum that forms an arbitrary shape with a center of mass that rests at a distance $\overline r$ from the origin, with a moment of inertia $I$. To find the total kinetic energy $T$, we must sum the kinetic energies of each infinitesimal particle forming the physical pendulum:
+\begin{align*}
+    T &= \frac{1}{2}\sum m_iv_i^2 = \frac{1}{2}\sum m_i r_i^2\dot\varphi^2 \\
+    &= \frac{1}{2}\dot\varphi^2\sum m_ir_i^2 = \frac{1}{2}I\dot\varphi^2
+\end{align*}
+For the potential energy, we treat the pendulum as a point particle at its center of mass. That is,
+\[ V = mg\overline r(1-\varphi) \approx \frac{1}{2}mg\overline r \varphi^2\]
+The total mechanical energy $T+V$ is given by
+\[ E = T+V = \frac{1}{2}\pqty{I\dot\varphi^2 + mg\overline r\varphi^2}\]
+Since energy is conserved, $\dot E = 0$ so
+\begin{align*}
+    \dot E &= I\dot\varphi \ddot\varphi + mg\overline r \varphi\dot\varphi \\
+    &= I\ddot \varphi + mg\overline r \varphi = 0
+\end{align*}
+This gives the equation of motion
+\[ \ddot\varphi = -\frac{mg\overline r}{I}\varphi \]
+which describes a simple harmonic oscillator with angular frequency $\omega = \sqrt{mg\overline r/I}$.
+\section{Damped Harmonic Motion}
+Oftentimes the motion of a spring is not perfectly harmonic, and instead decays based on its speed, giving the equation of motion
+\[ m\ddot x= -kx - b\dot x\]
+We define the quantity $\gamma \equiv -b/(2m)$ as the \textbf{damping constant} for the spring, and $\omega_0 \equiv \sqrt{k/m}$ as the \textbf{natural frequency} of the spring. With these constants, the equation of motion becomes  
+\[ \ddot x + 2\gamma \dot x + \omega_0^2 x = 0\]
+The reasoning for these particular choices of constant will become clear momentarily. 
+
+The motion has a characteristic equation given by $r^2 + 2\gamma r + \omega_0^2 = 0$. Based on the sign of the discriminant $4(\gamma^2 - \omega_0^2)$, the motion may fall into one of three categories.
+
+
+\begin{enumerate}
+    \item \textbf{(Two Real Roots)}: We obtain the general solution $x(t) = c_1e^{r_1t} + c_2e^{r_2t}$. The roots are given by 
+    \[ r_{1,2} = \frac{-2\gamma \pm \sqrt{4\gamma ^2-4\omega_0^2}}{2} = -\gamma \pm \sqrt{\gamma^2-\omega_0^2} \]
+    which are easily observed to both be negative, ensuring that our solution decays over time, as expected. This corresponds to a graph that doesn't even complete one oscillation before dying off, which matches with our intuition; the discriminant is positive when $\gamma$ is very large compared to $\omega_0$, meaning that a lot of damping is happening. This type of solution is known as \textbf{overdamping}.
+
+    \item \textbf{(Two Imaginary Roots)}: We obtain the general solution $x(t) = e^{\alpha t}\pqty{c_1 \cos (\beta t) + c_2\sin(\beta t)}$, where 
+    \[ \alpha = -\gamma  \quad\text{and}\quad \beta = \sqrt{\omega_0^2 - \gamma^2}\]
+    Further, we define the quantity $\omega \equiv \sqrt{\omega_0^2 - \gamma^2}$ as the \textbf{actual frequency} of the oscillations, allowing us to rephrase the general solution as $x(t) = e^{-\gamma t}\pqty{c_1\cos(\omega t) + c_2\sin(\omega t)} = A_0e^{-\gamma t}\cos(\omega t + \phi)$. The general solution corresponds to a graph that oscillates with decreasing amplitude; this behavior is known as \textbf{underdamping}.
+    \item \textbf{(Repeated Real Root)}: Finally, at the boundary between underdamping and overdamping lies \textbf{critical damping}, when $\gamma = \omega^2_0$. We find the general solution
+    \[ x(t) = c_1 e^{-\gamma t} + c_2te^{-\gamma t} \]
+    Which looks quite similar to overdamped motion, but will decrease slightly slower.
+\end{enumerate}
+Considering the energy of the motion, we say that the total energy at a time $t$ is proportional the amplitude at that time. For underdamped motion, the motion is governed by $x(t) = A_0e^{-\gamma t}\cos(\omega t + \phi)$, and so the amplitude of oscillation at any given time is $A = A_0e^{-\gamma t}$,  which tells us the total energy is given by $E = \frac{1}{2}kA^2 = \frac{1}{2}A_0ke^{-2\gamma t}$. 
+
+We also define the decay time as $\tau = 1/(2\gamma)$, which represents the amount of time it takes for the energy to decrease by a factor of $1/e$. 
