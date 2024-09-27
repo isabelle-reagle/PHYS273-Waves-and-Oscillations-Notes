@@ -1,0 +1,194 @@
+\chapter{Coupled Oscillations; Normal Modes}
+Consider a system of two masses, with each connected to a fixed wall by a spring of constant $k$, and the two masses are connected to each other by a spring of spring constant $k'$. 
+
+If we define $x_1$ and $x_2$ as the positions of the masses, where $x_1=0$ denotes the equilibrium position of the first mass and $x_2=0$ denotes the equilibrium position of the second mass.
+
+The equations of motion become
+\[ m\ddot x_1 = -kx_1 - k'(x_1-x_2)\]
+\[ m\ddot x_2 = -kx_2 -k'(x_2-x_1)\]
+\subsection*{Energy}
+Analyzing the energy of the system, we see
+\begin{align*}
+    U &= \frac{1}{2}kx_1^2 + \frac{1}{2}k'(x_1-x_2)^2 + \frac{1}{2}kx_2^2  
+\end{align*}
+So we can derive the forces on either mass with $F_1 = -\partial U/\partial x_1$ and $F_2 = -\partial U/\partial x_2$. 
+
+\subsection*{Coupled Pendulums}
+Consider two pendulums each with length $\ell$ and a mass $m$ suspended from them, connected by a spring with spring constant $k$. We will consider the energy of these pendulums.
+
+The potential energy from the height of $m_1$ is given by 
+\[ U_1 = mg\ell(1-\cos\theta) \approx \frac{1}{2}mg\ell\theta^2 = \frac{1}{2\ell}mgx_1^2 \]
+where $x_1$ is the arclength traveled by $m_1$ away from equilibrium. The potential energy from $m_2$ is given similarly, and the potential energy from the spring is given by $\frac{1}2 k(x_1-x_2)^2$, so
+\[ U = \frac{1}{2\ell}mgx_1^2 + \frac{1}{2\ell}mgx_2^2 + \frac{1}{2}k(x_1-x_2)^2\]
+which tells us
+\begin{align*}
+    F_1 = -\pdv{U}{x_1} &= -\frac{mg}{\ell}x_1 - k(x_1-x_2) \\
+    F_2 = -\pdv{U}{x_2} &= -\frac{mg}{\ell}x_2 - k(x_2-x_1)
+\end{align*}
+
+\section{Solution to the Equation of Motion}
+We will focus on the first scenario, with the masses coupled by three springs. But the same analysis applies quite readily to the pendulum case, and indeed to many other analogous cases.
+\subsection*{First Method}
+The first method is the easiest but is only applicable to a small subset of problems. If we add the equations of motion for $x_1$ and $x_2$ together, we see
+\[ m(\ddot x_1 + \ddot x_2) = -k(x_1+x_2)\]
+Then, subtracting the second equation from the first yields
+\[ m(\ddot x_1 - \ddot x_2) = (-k+2k')(x_1-x_2)\]
+If we define the two quantities $\omega_s = \sqrt{k/m}$ (slow frequency) and $\omega_f = \sqrt{(k+2k')/m}$ (fast frequency), we get the two solutions
+\begin{align*}
+    x_1(t) + x_2(t) &= 2A_s\cos(\omega_s t + \phi_s) \\
+    x_1(t) - x_2(t) &= 2A_f\cos(\omega_f t+\phi_f)
+\end{align*}
+The reason for the twos in front of the amplitudes will become clear momentarily. The critical result here is that there are two \textit{modes} of oscillation--one for $x_1+x_2$ and one for $x_1-x_2$. 
+
+To pick out either $x_1$ or $x_2$, we can subtract or add the two equations to find
+\begin{align*}
+    x_1(t) &= A_s\cos(\omega_st+\phi_s) + A_f\cos(\omega_ft+\phi_f) \\
+    x_2(t) &= A_s\cos(\omega_st+\phi_s)-A_f\cos(\omega_ft+\phi_f)
+\end{align*}
+Now, suppose we impose the four initial conditions $x_1(0)=0$, $\dot x_1(0)=0$, $x_2(0)=A$, and $\dot x_2(0)=0$. We can get expressions for $\dot x_1$ and $\dot x_2$,
+\begin{align*}
+    \dot x_1(t) &= -A_s\omega_s\sin(\omega_s t+\phi_s) - A_f\omega_f\sin(\omega_ft+\phi_f) \\
+    \dot x_2(t) &= -A_s\omega_s\sin(\omega_s t+\phi_s) + A_f\omega_f\sin(\omega_ft+\phi_f)
+\end{align*}
+This means that
+\begin{align*}
+    0 &= A_s\cos\phi_s + A_f\cos \phi_f \\
+    0&= -A_s\omega_s\sin\phi_s -A_f\omega_f\sin\phi_f \\
+    A &= A_s\cos\phi_s - A_f\cos\phi_f \\
+    0 &= -A_s\omega_s\sin\phi_s + A_f\omega_f\sin\phi_f
+\end{align*}
+Adding equations (1) and (3) and (2) and (4) yields
+\begin{align*}
+    2A_s\cos\phi_s &= A \\
+    2A_s\omega_s\sin\phi_s &= 0
+\end{align*}
+So $\phi_s = 0$, $A_s=A/2$. Then, subtracting (3) from (1) and (2) from (4) gives
+\begin{align*}
+    2A_f\cos\phi_f &= -A \\
+    2A_f\omega_f\sin\phi_f &= 0
+\end{align*}
+So $A_f = -A/2$ and $\phi_f = 0$. Then, $x_1$ and $x_2$ are
+\begin{align*}
+    x_1(t) &= \frac{A}{2}(\cos\omega_s t - \cos \omega_f t) = A\sin\pqty{\frac{(\omega_f-\omega_s)t}{2}}\sin\pqty{\frac{(\omega_f+\omega_s)t}{2}} \\
+    x_2(t) &= \frac{A}{2}(\cos \omega_s t + \cos\omega_f t)= A\cos\pqty{\frac{(\omega_f-\omega_s)t}{2}}\cos\pqty{\frac{(\omega_f+\omega_s)t}{2}}
+\end{align*}
+Defining $\Omega \equiv (\omega_f+\omega_s)/2$ and $\epsilon\equiv (\omega_f-\omega_s)/2$, we note that $\Omega$ will be much larger than $\epsilon$, so the equations of motion
+\begin{align*}
+    x_1(t) &= A\sin\Omega t\sin\epsilon t \\
+    x_2(t) &= A\cos\Omega t\cos\epsilon t
+\end{align*}
+produce a phenomenon known as \textbf{beat waves}; the slow $\epsilon$ oscillator determines the amplitude of the fast $\Omega$ waves.
+
+In the special case where $x_1$ and $x_2$ are perfectly in phase or perfectly out of phase, the quantity $x_1-x_2$ in the original differential equation of motion is completely constant and so the differential equation reduces to
+\[ m\ddot x_1 = -kx_1 - k'\delta \]
+\[ m\ddot x_2 = -kx_2 + k'\delta \]
+where $\delta \equiv x_1-x_2$ is constant. Then, the differential equations become entirely uncoupled and act like regular harmonic oscillators. 
+\subsection*{Second Method}
+We will now explore a different, more general way of solving the coupled differential equations. First, we will rephrase our problem using a matrix. The differential equation
+\begin{align*}
+    m\ddot x_1 &=-kx_1 -k'(x_1-x_2) \\
+    m\ddot x_2 &= -kx_2 - k'(x_2-x_1)
+\end{align*}
+Defining the position vector $\mbf x = \begin{pmatrix}
+    x_1(t) \\ x_2(t)
+\end{pmatrix}$, the mass matrix $\mbf M = \begin{pmatrix}
+    m & 0 \\
+    0 & m
+\end{pmatrix}$, and the spring constant matrix $\mbf K = \begin{pmatrix}
+    k+k'  & -k' \\
+    -k' & k+k'
+\end{pmatrix}$ the differential equation can be rephrased:
+\begin{align*}
+    \mbf M \mbf{\ddot x} &= -\mbf K \mbf x
+\end{align*}
+We can guess the fictitious complex solution (which we will take the real component of later) $\mbf z = \mbf a e^{i\omega t}$ where $\mbf a\in\C^2$ is a constant vector. Then, the differential equation becomes
+\[ -\mbf M \omega^2 \mbf a e^{i\omega t} = -\mbf K\mbf a e^{i\omega t}\]
+Or, in other words,
+\[ (\mbf K -\omega^2 \mbf M)\mbf a = 0\]
+This has either only the trivial solution $\mbf a =\mbf 0$ if $\mbf K - \omega^2\mbf M$ is invertible, or a set of solutions if $\mbf K -\omega^2\mbf M$ is not invertible. We are only interested in the nontrivial case, so we want to ensure $\det(\mbf K -\omega^2\mbf M) = 0$. This gives
+\begin{align*}
+    \det \begin{pmatrix}
+        k+k'-m\omega ^2 & -k' \\
+        -k' & k+k'-m\omega^2
+    \end{pmatrix} = (k+k'-m\omega^2)^2 + (k')^2 = 0
+\end{align*}
+The solutions to this equation give exactly the normal frequencies of the system. 
+\section{Normal Modes}
+Before, we found two \textit{normal frequencies} $\omega_s = \sqrt{k/m}$ and $\omega_f = \sqrt{(k+2k')/m}$. Each of these frequencies correspond to a perfectly sinusoidal motion for each mass.
+
+To see this, consider the case where $x_1$ and $x_2$ oscillate perfectly in phase with one another, so $x_1=x_2$ and
+\begin{align*}
+    m\ddot x_1 &= -kx_1 - k'(x_1-x_2) = -kx_1\\
+    m\ddot x_2 &= -kx_2 + k'(x_1-x_2) = -kx_2
+\end{align*}
+So the oscillations have frequency $\sqrt{k/m}$, which is just the slow frequency $\omega_s$.
+
+Now, let $x_1$ and $x_2$ oscillate perfectly out of phase with one another, so
+\begin{align*}
+    m\ddot x_1 &= -kx_1-k'(x_1-x_2) = -(k+2k')x_1 \\
+    m\ddot x_2 &= -kx_2 + k'(x_1-x_2) = -(k+2k')x_2
+\end{align*}
+So the oscillations have frequency $\sqrt{(k+2k')/m}$, which is just the fast frequency $\omega_f$.
+\section{N Masses}
+Consider a string of tension $T$ with $N$ masses $m_1, m_2, \dots, m_N$ threaded on it, each mass separated by a distance $a$.
+
+The force in the $y$ direction for mass $n$ can be written as
+\[ m\ddot x_n= -T\sin\theta_{n} - T\sin\theta_{n-1}\]
+or
+\begin{align*}
+    m\ddot x_n &= -T(\sin\theta_n + \sin\theta_{n+1}) \\
+    &= -T\pqty{\frac{x_n-x_{n-1}}{a} + \frac{x_{n}-x_{n+1}}{a}} \\
+    &= \frac{T}{a}(x_{n-1}-2x_n + x_{n+1})
+\end{align*}
+Guessing a solution $y_n(t) = A_ne^{i\omega t}$, we find
+\begin{align*}
+    -A_nm\omega^2 &= \frac{T}{a}(A_{n-1}-2A_n+A_{n+1})
+\end{align*}
+or
+\[ -A_{n-1} + \pqty{2-\frac{m\omega^2 a}{T}}A_n - A_{n+1} = 0\]
+This allows us to write
+\[ \frac{A_{n-1}+A_{n+1}}{A_n} = \frac{2\omega_0^2-\omega^2}{\omega_0^2}\]
+where we define $\omega_0^2 = (T/a)(1/m)$. Remarkably, this means that the ratio $(A_{n-1}+A_{n+1})/A_n$ is constant regardless of the value of $n$.
+
+Generally, the coefficients $A_n$ are complex, so we write them as $A_r = |C|e^{i\delta}e^{i\theta_n}$. The phase $\delta$ represents the phase of the \textit{whole system}, while $\theta_n$ represents the phase of just the mass $n$.
+
+We additionally make the assumption that each $\theta_n = n\theta$ for a fixed $\theta$. We will see why this works later. 
+
+Plugging this into the ratio,
+\begin{align*}
+    \frac{e^{i(n-1)\theta}+e^{i(n+1)\theta}}{e^{in\theta}}  &= e^{-i\theta}+e^{i\theta} = 2\cos\theta 
+\end{align*}
+so, $2\cos\theta = (2\omega_0^2-\omega^2)/\omega_0^2$.
+
+Next, we will consider the idea of \textbf{boundary conditions}. Since the ends of the string are fixed at $y=0$, we have $\Re A_0 = \Re A_{N+1} = 0$. Thus
+\[ \Re A_0  = \Re |C|e^{i\delta}e^{0} = \Re |C|e^{i\delta} = |C|\cos(\delta) \]
+Since $|C|=0$ implies no motion, we are not interested in that solution. So we have $\delta = \pm \pi/2$. We will arbitrarily choose to use $-\pi/2$, so
+\begin{align*}
+    A_n = |C|e^{-i\pi/2}e^{in\theta}
+\end{align*}
+So we also have
+\[ \Re A_{N+1} = \Re |C|e^{i\delta}e^{i(N+1)\theta} = |C|\cos((N+1)\theta+\delta)\]
+Since $\delta=-\pi/2$, we must then have $(N+1)\theta = m\pi$ for some $m$. Thus, 
+\[ \theta = \frac{m\pi}{N+1}\]
+Where $m = 1, 2, \dots, N$. The reason $m$ stops at $N$ is because each $m$ represents a normal mode; since  there are $N$ normal modes, we look for $N$ unique $\theta$s. If we considered $m>N$, we would notice that the values of $m$ begin to repeat themselves and give no new information.
+
+We also know that $2\cos(\theta) = (2\omega_0^2-\omega^2)/\omega_0^2$, so
+\[ \omega_m = 2\omega_0\sin\pqty{\frac{m\pi}{2(m+1)}}\]
+This means that for mass $n$ in normal mode $m$ at time $t$,
+\[ y_n^m(t) = |C|e^{-\pi/2}e^{inm\pi/(N+1)}e^{i\omega_m t} = |C|e^{i\omega_m t + in\theta - \pi/2}\]
+so
+\[ \Re y_n^m(t) = \sin(\omega_m t + n\theta )\]
+Because of how we defined $\omega_m$, we see that $2\omega_0$ is the largest possible normal mode frequency in the system (cutoff frequency). We may also write
+\[ \omega_0 = \sqrt{\frac{T}{ma}} = \frac{1}{a} \sqrt{\frac{T}{m/a}} = \frac{1}{a}\sqrt{\frac{T}{\mu}}\]
+where we defined $\mu\equiv m/a$ as the linear mass density.
+
+\subsection{$N\to\infty$}
+Letting $N\to\infty$, we can rephrase our $y_r$s as a function of a continuous position $x$, giving an equation of motion 
+\begin{align*}
+    m\pdv[2]{y}{x} &= \frac{T}{m}\pqty{\frac{y(x+\Delta x)-y(x)}{\Delta x} + \frac{y(x)-y(x-\Delta x)}{\Delta x}} \\
+    &= \frac{T}{m}\pqty{y_x(x) + y_x(x-\Delta x)} \\
+    &= \Delta x\frac{T}{m} \pdv[2]{y}{x} \\
+    \frac{m}{\Delta x} \pdv[2]{y}{t} &= T\pdv[2]{y}{x} \\
+    \mu\pdv[2]{y}{t} &= T\pdv[2]{y}{x}
+\end{align*}
+This is the \textbf{wave equation}.
