@@ -1,0 +1,493 @@
+\chapter{Transverse Waves}
+In the previous chapters, we built the foundation necessary to begin studying waves. We will first consider non-dispersive waves, which have the special property that all waves travel with the same speed, regardless of their wavelength and frequency. Later, we will explore dispersive waves, which change speed depending on their wavelength and frequency.
+
+
+There are two types of waves: transverse and longitudinal waves. Transverse waves have a disturbance normal to the direction of propagation (this is the type of wave we analyzed previously). Longitudinal waves have a disturbance along the direction of propagation.
+\section{The Wave Equation}
+Consider a string with a constant tension $T$ applied to it, connected to two walls on either side at the same height.  
+
+If a pulse is applied to the system at some point along the string, we expect the pulse to travel through the string until it reaches the far end, upon which it will reflect. For a small deformed section of the string, there are two tension forces, pointing nearly in opposite directions. These tension forces will have a longitudinal component and a transverse component. The longitudinal components cancel and each tension has a transverse component
+\[ T\sin\theta \quad\text{and}\quad T\sin(\theta+\dd\theta)\]
+for small angles, we write $\sin\theta\approx \tan\theta$, $\sin(\theta+\dd\theta) \approx \tan(\theta+\dd\theta)$. If the transverse component of the wave is described by a function $\psi(x,t)$ called the \textbf{wavefunction}, we can write $\tan\theta = \partial \psi/\partial x$. So, the total restoring force (pointing downwards) is given by
+\[ F = T\pdv{\psi(x+\dd x, t)}{x}-T\pdv{\psi(x, t)}{x} = T\pdv[2]{\psi(x,t)}{x}\dd x\]
+The mass of the small section of string is given by $m = \mu\dd x$ (technically, it is given by $\mu\sqrt{\dd x^2+\dd\phi^2}$, but we assume oscillations are small so $\sqrt{\dd x^2+\dd\phi^2}\approx \dd x$), so we find the equation of motion
+\[ \pdv[2]{\psi}{x} = \frac{1}{c^2} \pdv[2]{\psi}{t}\]
+where $c^2\equiv T/\mu$ is the speed of propagation of the wave (\textit{phase velocity}). This is the same wave equation we previously found.
+
+We will guess a solution to this equation in the form $\psi(x,t) = a(x)e^{i\omega t}$. Then, we have
+\[ \pdv[2]{\psi}{x} = \dv[2]{a}{x} e^{i\omega t}\quad\text{and}\quad \pdv[2]{\psi}{t} = -\omega^2 a(x)e^{i\omega t}\]
+Thus, we wave equation becomes
+\begin{align*}
+    c^2\dv[2]{a}{x}e^{i\omega t} &= -\omega^2 a e^{i\omega t} \\
+    \dv[2]{a}{x} &= -\frac{\omega^2}{c^2} a
+\end{align*}
+But this is just the regular harmonic oscillator, so we find that 
+\[ a(x) = Ae^{\pm ikx} \]
+where $k\equiv \omega/c$ is the \textbf{wave number}, and has units of $1/m$. 
+
+But what is the physical interpretation of the wave number? If we denote the wavelength of $a$ with $\lambda$, the wave number is related to $\lambda$ with
+\[ k = \frac{2\pi}{\lambda} \]
+That is, $k$ is the number of radians of spatial oscillations in one unit length. The relationship between $k$ and $\lambda$ is analogous to the relationship between $\omega$ and $\nu$.
+
+Plugging this back into our guess, we find that
+\[ \psi(x,t) = Ae^{\pm ikx \pm i\omega t}\]
+The most general solution is the sum of each of these four combinations,
+\[ \psi(x,t) = Ae^{i(kx+\omega t)} + Be^{i(kx-\omega t)} + B^{*}e^{i(-kx+\omega t)} + A^{*}e^{i(-kx-\omega t)} \]
+Where the conjugates appear from the requirement that $\psi(x,t)$ is real.
+
+There are two main (equivalent) forms of this equation that will use, depending on the context.
+\begin{enumerate}
+    \item For a \textbf{traveling wave}, where one wave is moving to the left and one is moving to the right, we can write
+    \[ \psi(x,t) = A_1\cos(kx + \omega t + \phi_1) + A_2\cos(kx - \omega t + \phi_2)\]
+    \item For a \textbf{standing wave}, where all points on the string pass the $x$ axis at the same time, we can write
+    \[ \psi(x,t) = A_1 \cos(kx+\phi_1)\cos(\omega t) + A_2\cos(kx+\phi_2)\sin(\omega t)\]
+    We will revisit standing waves later.
+\end{enumerate}
+\subsection*{Traveling Waves}
+Consider a traveling wave of the form
+\[ \psi(x,t) = A_1\cos(kx + \omega t +\phi_1) \]
+(we throw out the other term just for ease of visualization). At some $t$ value $t^*$, the wave looks like
+\[ \psi(x, t^*) = A_1\cos(kx + \omega t^* + \phi_1) \]
+This looks like a cosine graph with an ``effective phase" $\omega t^* + \phi_1$. Then, at some later time $t^* + \Delta t$, the graph looks the same, but shifted over to the left by some amount, giving a new effective phase of $\omega t^* + \omega \Delta t + \phi_1$. 
+
+If $\Delta t=1$, we find that the horizontal shift is just $\omega/k$. Thus, we call the speed of the wave $c = \omega/k$. Visually, this looks like the wave is moving over as time passes, which is where the name "traveling wave" originates.
+\subsection*{A more general solution}
+But our assumed solution $\psi(x,t) = Ae^{i(\pm kx \pm \omega t)}$ is far from the most general solution to the wave equation
+\[ \pdv[2]{\psi}{t} = c^2 \pdv[2]{\psi}{x} \]
+Consider now the proposed solution $\psi(x,t) = f(x \pm ct)$. We can use the chain rule to determine
+\[ \pdv[2]{\psi}{x} = \pdv[2]{f}{u} \quad\text{and} \quad \pdv[2]{\psi}{t} = c^2\pdv[2]{f}{u}\]
+where $u = x\pm ct$. Thus, $\psi(x,t) = f(x \pm ct)$ solves the wave equation.
+
+This can actually be connected with the solutions $a(x)e^{\pm i\omega t}$ with Fourier analysis, as we will cover later. For now though, we can just say that $\psi(x,t) = f(x\pm ct)$ is equivalent to saying
+\[ \psi(x,t) = A_1\cos(k_1x)\cos(ck_1 t) + A_2\cos(k_2x)\cos(ck_2t) + \cdots \]
+\section{Reflection and Transmission}
+\subsection*{Applying the Boundary Conditions}
+Instead of an infinite uniform string, consider an infinite string with density $\mu_1$ for $-\infty < x < 0$ and $\mu_2$ for $0 < x < \infty$. Although the density isn't uniform, the tension is still uniform throughout the whole string (otherwise it would be accelerating horizontally).
+
+Assume that a traveling wave of the form $\psi_i(x,t) = f_i(x - c_1t)$ starts off at the far right and moves towards $x=0$. We may equivalently write $\psi_i(x,t) = f_i\pqty{t - \frac{x}{c_1}}$, which turns out to be much more convenient in this case. As this so-called \textbf{incident wave} approaches $x=0$, what happens to it? 
+
+The most general thing that can happen is that there is some \textbf{reflected wave}
+\[ \psi_r(x,t) = f_r\pqty{t + \frac{x}{c_1}}\]
+and some \textbf{transmitted wave}
+\[ \psi_t(x,t) = f_t\pqty{t - \frac{x}{c_2}}\]
+In terms of the reflected and transmitted waves, the total expressions for the waves on the left and right are, respectively,
+\begin{align*}
+   \psi_L(x,t) &= \psi_i(x,t) + \psi_r(x,t) = f_i(t - x/c_1) + f_r(t + x/c_1) \\
+   \psi_R(x,t) &= \psi_t(x,t) = f_t(t - x/c_2)
+\end{align*}
+Suppose we know what the incident wave. To find expressions for the transmitted and reflected waves in terms of this, we can analyze the behavior of $\psi_L$ and $\psi_R$ at $x=0$. We have two conditions that must hold:
+\begin{enumerate}
+    \item The string must be continuous, so we must have (for all $t$),
+    \[ \psi_L(0, t) = \psi_R(0, t) \implies f_i(t) + f_r(t) = f_t(t)\]
+    \item The slope of the string must be continuous (otherwise, there would be some net non-infinitesimal force on the atom in the center, causing a near infinite acceleration). So, we must have (for all $t$),
+    \[ \pdv{\psi_L}{x}\biggr|_{x=0} = \pdv{\psi_R}{x}\biggr|_{x=0} \implies -\frac{1}{c_1} f_i'(t) + \frac{1}{c_1} f_r'(t) = -\frac{1}{c_2} f_t'(t) \]
+    Integrating this and removing the $c$s from the denominators gives
+    \[ c_2f_i(t) + c_2f_r(t) = c_1f_t(t)\]
+\end{enumerate}
+These two conditions together can be combined to say
+\[ f_r(s) = \frac{c_2-c_1}{c_2+c_1}f_i(s) \quad\text{and}\quad f_t(s) = \frac{2c_2}{c_2+c_1}f_i(s)\]
+where I wrote $s$ to emphasize that this relationship holds for any arbitrary $x,t$ values.
+\subsection*{Reflection}
+We can equivalently write the relation we just found in terms of $\psi$ by replacing the arbitrary argument $s$ with $t + x/c_1$. Then, we find
+\[ f_r(t + x/c_1) = \frac{c_2-c_1}{c_2+c_1} f_i(t - (-x)/c_1)\]
+Or, noting that $\psi_r(x,t) = f_r(t + x/c_1)$ and $\psi_i(x,t) = f_i(t - x/c_1)$,
+\[ \psi_r(x,t) = \frac{c_2-c_1}{c_2+c_1} \psi_i(-x,t) \]
+This can be interpreted as saying that at any given time $t$, the value of $\psi_r$ at position $x$ equals $(c_2-c_1)/(c_2+c_1)$ times the value of $\psi_i$ at position $-x$. This also implies that the speed of the $\psi_i$ wave is equal to the speed of the $\psi_r$ wave (but with opposite velocity) and it also implies that the width of the $\psi_i$ wave is equal to the width of the $\psi_r$ wave.
+
+The reflected wave is only actually real when its $x$ argument is to the left of $x=0$, and similar for the incident wave. But the mathematical extension of these waves to locations where they are no longer physically present is perfectly valid.
+\subsection*{Transmission}
+Lets now look at the transmitted wave. A similar analysis as we performed with the reflected wave allos us to find
+\[ \psi_t(x,t) = \frac{2c_2}{c_1+c_2} \psi_i ((c_1/c_2)x, t)\]
+This can be interpreted as saying that at any given time $t$, the value of $\psi_t$ at position $x$ equals $2c_2/(c_1+c_2)$ times the position of $\psi_i$ at position $(c_1/c_2)x$. This implies that the speed of the $\psi_t$ wave is $c_2/c_1$ times the speed of the $\psi_i$ wave and that its width is $c_2/c_1$ times the width of the $\psi_i$ wave. 
+
+Only positive values for $x$ are relevant here, since we are dealing with the transmitted wave that is only physically real for positive $x$.
+\subsection*{The Various Possible Cases}
+For convenience, we define the transmission and reflection coefficients as
+\[ R \equiv \frac{c_2-c_1}{c_2+c_1} \quad\text{and}\quad T\equiv \frac{2c_2}{c_1+c_2} \]
+Then,
+\begin{align*}
+    \psi_r(x,t) = R\psi_i(-x, t) \\
+    \psi_t(x,t) = T\psi_i((c_1/c_2)x, t)
+\end{align*}
+Note that we must always have $1+R  =T$, since $\psi_r(0, t) + \psi_i(0, t) = \psi_t(0, t)$.    
+
+We may equivalently write these coefficients in terms of the densities of the strings by using $c_1 =\sqrt{T/\mu_1}$ and $c_2 = \sqrt{T/\mu_2}$. This gives
+\[ R = \frac{\sqrt{\mu_1} - \sqrt{\mu_2}}{\sqrt{\mu_1} + \sqrt{\mu_2}}\quad\text{and}\quad T = \frac{2\sqrt{\mu_1}}{\sqrt{\mu_1} + \sqrt{\mu_2}}\]
+There are a few cases we should consider:
+\begin{enumerate}
+    \item \textbf{Brick wall on the right}: $\mu_2 = \infty$. This gives $R = -1$ and $T=0$. Nothing is transmitted, and the reflected wave is the same size as the incident wave, but is inverted due to the $R=-1$.
+    \item \textbf{Heavy string on right}: $\mu_1 < \mu_2 < \infty$. We have $-1 < R < 0$ and $0 < T < 1$. The wave is partially reflected and partially transmitted, with the reflected wave still flipping. Both the transmitted and reflected waves are smaller than the incident wave.
+    \item \textbf{Heavy string on left}: $\mu_2 < \mu_1 < \infty$. We have $0 < R < 1$ and $1<T<2$. The wave is partially reflected and partially transmitted. The reflected wave is not flipped, and is still smaller than the incident wave. But the transmitted wave is larger than the incident wave.
+    \item \textbf{Zero mass string on right}: $\mu_2 = 0$. We have $R = 1$ and $T=2$. There is complete (right side up) reflection in this case. Interestingly, while the string on the right technically ``moves," it transmits no energy since it has no mass.
+    \item \textbf{Uniform string}: $\mu_2 = \mu_1$. We have $R=0$ and $T=1$. Nothing is reflected and the wave passes through fully. This makes complete sense, as the ``boundary" point is no different than any other point on the string.    
+\end{enumerate}
+\section{Impedance}
+\subsection*{Definition of Impedance}
+In the previous section, we allowed the density to change at $x=0$, but the required that the tension remain constant. Now, we relax this restriction and also allow the tension to change.
+
+Suppose the tension on the left side, from $-\infty < x < 0$, is $T_1$ and the tension on the right, from $0 < x < \infty$ is $T_2$. The net transverse force at $x=0$ must be zero, since otherwise it would have infinite transverse acceleration. This means that $T_1\sin\theta_1 = T_2\sin\theta_2$. 
+
+Using the same approximation as before, this gives the condition that at $x=0$,
+\[ T_1\pdv{\psi_L}{x} = T_2\pdv{\psi_R}{x} \]
+We can now write $\psi_L = f_i(t - x/c_1) + f_r(t + x/c_1)$ and $\psi_R = f_r(t - x/c_2)$, which then yields
+\[ -\frac{T_1}{c_1} f_i' + \frac{T_1}{c_1}f_r' = -\frac{T_2}{c_2}f_t'\]
+The other boundary condition is unchanged, so we can carry over all of our analysis from the previous section relatively unchanged, except with the small modification that every instance of $c_1$ is replaced with a $c_1/T_1$, and likewise for $c_2$.
+
+The quantity $c/T$ can be written as 
+\[ \frac{c}{T} = \frac{\sqrt{T/\mu }}{T} = \frac{1}{\sqrt{T\mu}} \equiv \frac{1}{Z}\]
+Where $Z$, called the \textbf{impedance}, is the quantity defined with
+\[ Z \equiv \frac{T}{c} = \sqrt{T\mu} \]
+This allows us to obtain
+\[ R = \frac{Z_1-Z_2}{Z_1+Z_2} \quad\text{and}\quad T = \frac{2Z_1}{Z_1+Z_2}\]
+\subsection*{Physical Meaning of Impedance}
+What is the physical meaning of impedance? To answer this, consider the transverse force that the ring applies to the string on the left. Since there is zero new force on the ring, this force also equals the transverse force that the right string applies to the ring, which is
+\[ F_y = T_2 \pdv{\psi_R(x,t)}{x} = T_2\pdv{f_t(t-x/c_2)}{x} \]
+Where all of these derivatives are evaluated at $x=0$.
+
+But the chain rule tells us that the partials of $f_t$ are related by
+\[ \pdv{f_t}{x} = -\frac{1}{c_2} \pdv{f_t}{t} \]
+Thus, we have
+\[ F_y = -\frac{T_2}{c_2} \pdv{f_t}{t} = -Z_2v_y\]
+Where $v_y = \partial \psi_R/\partial t$ is the transverse velocity of the ring at $x=0$. From this, we can see that the impedance acts as a sort of damping coefficient, causing the speed of the ring to slow down.
+
+We can see from the definition of impedance that it only depends on the physical properties of the string, and is not a property of any specific wave on the string.
+
+If we consider the impedances of the two strings, $Z_1 = \sqrt{T_1\mu_1}$ and $Z_2 = \sqrt{T_2\mu_2}$, we can derive an interesting fact. Namely, when $Z_1=Z_2$, we have $R=0$ and $T=1$. That is, the wave is fully transmitted, and none of it is reflected. In this case, we say that the two strings are \textbf{impedance matched}, a concept we will explore in much more detail below.
+
+Note that this is an extension of the uniform string case we considered previously--when the tension is not constant, it is still possible for the string to act uniform, as long as the mass densities are adjusted properly to make the product $T\mu$ constant.
+
+As far as reflection and transmission are concerned, a string is \textbf{entirely} characterized just by its impedance $Z$. No other quantities are relevant. 
+\section{Energy}
+\subsection*{Energy}
+What is the energy of a wave? Or, more precisely, what is the energy density per unit length? Consider a small section of string between $x$ and $x + \dd x$. The kinetic energy follows from the transverse motion (the longitudinal motion is negligible), so we find
+\[ K_{\dd x} = \frac{1}{2}(\dd m)v_y^2 = \frac{1}{2}(\mu \dd x) \pqty{\pdv{\psi}{t}}^2 \]
+The potential energy depends on how much the string is stretched. Previously, we made the approximation that the length of a string was $\sqrt{(\dd\psi)^2 + (\dd x)^2}\approx \dd x$. But this is not valid here, since we are interested in the \textbf{stretched length} of the string. $\dd x$ only gives the equilibrium length, which, while much greater than the stretched length, will be irrelevant for our purposes.
+
+Instead, recall the Taylor series expansion
+\[ \sqrt{1+\epsilon} \approx 1 + \epsilon/2\]
+Rewriting $\sqrt{(\dd \psi)^2 + (\dd x)^2} = \dd x\sqrt{1 + (\partial \psi/\partial x)^2}$ and applying the Taylor series, we have
+\[ \dd x\sqrt{1 + \pqty{\pdv{\psi}{x}}^2} \approx \dd x + \frac{\dd x}{2} \pqty{\pdv{\psi}{x}}^2\]
+The stretch of the section of string is then
+\[ \dd \ell = \frac{\dd x}{2} \pqty{\pdv{\psi}{x}}^2 \]
+This stretched is caused by the tension pulling at the ends of the string on either side. These forces do an amount $T\dd \ell$ of work, and this is where the potential energy comes from.
+
+Critically, the potential energy of the string does \textbf{not} come from gravity--snce we assumed the transverse displacement is small, the potential energy due to gravity is negligible compared to the potential energy due to the stretch of the string.
+
+So, we have that the potential energy is 
+\[ U_{\dd x} = \frac{1}{2}T\dd x \pqty{\pdv{\psi}{x}}^2\]
+Now, the total energy per unit length (we will denote it with $\mcl E$) is given by
+\begin{align*}
+    \mcl E(x,t) = \frac{K_{\dd x} + U_{\dd x}}{\dd x} &= \frac{1}{2}\mu \pqty{\pdv{\psi}{t}}^2 + \frac{1}{2}T\pqty{\pdv{\psi}{x}}^2 \\
+    &= \frac{\mu}{2} \pqty{\pqty{\pdv{\psi}{t}}^2 + \frac{T}{\mu}\pqty{\pdv{\psi}{x}}^2} \\
+    &= \frac{\mu}{2} \pqty{\pqty{\pdv{\psi}{t}}^2 + c^2\pqty{\pdv{\psi}{x}}^2}
+\end{align*}
+This expression is valid for any arbitrary wave, but we will draw particular attention to the special case of a single traveling wave of the form $\psi(x,t) = f(x\pm ct)$. For such a wave, the energy density can be further simplified. As we know, the partial derivatives of a wave in this form are related by $\partial \psi/\partial t = \pm c\; \partial \psi/\partial x$. So, we can get two different equivalent expressions for the energy density of a traveling wave:
+\begin{align*}
+    \mcl E(x,t) = \mu \pqty{\pdv{\psi}{t}}^2 \quad\text{or}\quad \mcl E(x,t) = \mu c^2 \pqty{\pdv{\psi}{x}}^2
+\end{align*}
+With the definition of impedance $Z = \sqrt{T\mu}$ and $c=\sqrt{T/\mu}$, this also becomes
+\[ \mcl E(x,t) = \frac{Z}{c} \pqty{\pdv{\psi}{t}}^2 \quad\text{or}\quad \mcl E(x,t) = Zc\pqty{\pdv{\psi}{x}} \]
+\subsection*{Power}
+Once again consider a small section of string. The string is pulled on by the surrounding string with a transverse force given by $F_y = -T \, \partial \psi/\partial x$, so the power is 
+\[ P(x,t) = F_y v_y = \pqty{-T\pdv{\psi}{x}}\pqty{\pdv{\psi}{t}}\]
+This expression is valid for any arbitrary wave, but let's once again consider the special case of a single traveling wave $\psi(x,t) = f(x \pm ct)$. Plugging in $\pdvi{\psi}{t} = \pm c\;\pdvi{\psi}{x}$, we get
+\[ P(x,t) = \mp \frac{T}{c} \pqty{\pdv{\psi}{t}}^2\]
+which can be once again rewritten with impedance to give
+\[ P(x,t) = \mp Z \pqty{\pdv{\psi}{t}}^2 = \mp c\mcl E(x,t)\]
+Thus, the magnitude of the power is simply the wave speed times the energy density. For a rightward traveling wave $f(x-ct)$, it is positive and for a leftward traveling wave $f(x+ct)$, it is negative. 
+\section{Standing Waves}
+\subsection*{Semi-infinite string}
+\textbf{Fixed end:} Consider a leftward-moving sinusoidal wave that is incident on a brick wall at its left end, located at $x=0$. The most general form of the left-moving sinusoidal wave is
+\[ \psi_i(x,t) = \frac{A}{2} \cos(\omega t + kx + \phi) \]
+where $\omega$ and $k$ satisfy $\omega/k = c$, and $A$ and $\phi$ are constants that depend on the initial conditions of the wave (the reason we use $A/2$ instead of $A$ will become clear momentarily). 
+
+Once the wave hits the brick wall, we can treat it like a wave attempting to transmit to a string with ``infinite" impedance (the brick wall). This gives $R=-1$, so the wave is entirely reflected and inverted. The reflected rightward-moving wave is then
+\[ \psi_r(x,t) = R\psi_i(-x, t) = -\frac{A}{2}\cos(\omega t - kx + \phi) \]
+The total wave is therefore
+\begin{align*}
+    \psi(x,t) = \psi_i(x,t) + \psi_r(x,t) &= \frac{A}{2} \cos(\omega t+kx+\phi) - \frac{A}{2} \cos(\omega t-kx + \phi) \\
+    &= A\sin(\omega t +\phi)\sin(kx)
+\end{align*}
+We can double check this wave by noticing that $\psi(0, t)=0$ for all $t$, so the boundary condition is satisfied. Waves of this form are very special, and are thus given a unique name--\textbf{standing waves}. The amplitude of these waves in terms of $x$ is a function of time, $2A\sin(\omega t+\phi)$. Critically, these waves all pass through the origin at the same time, and all have the same phase (or a phase differing by a factor of $\pi$). The reader is invited to create plots of waves like these using a software like desmos to explore some of their interesting qualitative features.  
+
+Notice that any point for which $kx = \pi n$ for some $n\in \N$ are always zero. Points of this type are called \textbf{nodes}. Point where $kx = \pi n + \pi/2$ for some $n\in\N$ are always greater than the other points on the wave since they correspond to maximums of $\sin(kx)$. Points of this type are called \textbf{antinotes}.
+
+\textbf{Free end:} Consider the same leftward-moving sinusoidal wave, but this time instead of a brick wall on the left, suppose it is a free end. As before, we write
+\[ \psi_i(x,t) = A\cos(\omega t+kx+\phi) \]
+and analyze the transmission of the wave. In this case, $R=1$ so the wave is entirely reflected, but not inverted. The reflected wave is then
+\[ \psi_r(x,t) = R\psi_i(-x, t) = \frac{A}{2} \cos(\omega t-kx + \phi) \]
+The total wave is therefore
+\begin{align*}
+    \psi(x,t) = \psi_i(x,t) + \psi_r(x,t) &= \frac{A}{2} \cos(\omega t +kx+\phi) + \frac{A}{2} \cos(\omega t-kx + \phi) \\
+    &= \sin(\omega t+\phi)\cos(kx) 
+\end{align*}
+We can also check to make sure that this satisfies the boundary condition that at $x=0$, $\pdvi{\psi}{x} = 0$ for all $t$. If $\pdvi{\psi}{x}$ was nonzero at the boundary, there would be some net non-infinitesimal transverse force on the end of the string which would effectively give it an infinite acceleration. Since $\cos(kx)$ is maximized at $x=0$, $x=0$ is an antinode. 
+
+The analysis for both the free and fixed end could have just as well been done by writing the general form for a standing wave
+\[ \psi(x,t) = A_1\cos(\omega t+kx)\cos(kx) + A_2\cos(\omega t+\phi)\sin(kx)\]
+and considering the boundary conditions. There is no real advantage to either of these methods, so feel free to pick the one which you are most comfortable with.
+\subsection*{Finite String}
+Now consider a string with endpoints at $x=0$ and $x=L$. There are three possible boundary conditions for this string: both ends fixed, both ends free, or one fixed and one free. In general, the boundary conditions at a fixed end are $\psi=0$ and at a fee end, $\pdvi{\psi}{x} = 0$.
+
+\textbf{Two fixed ends:} The two boundary conditions are $\psi(0,t) = 0$ and $\psi(L, t) = 0$. We already found that the most general wave satisfying the first condition is 
+\[ \psi(x,t) = \cos(\omega t+\phi)\sin(kx)\]
+For the second boundary condition, we require that $x=L$ be a node--that is, we require $\sin(kL) = 0$. This means that $kL$ must equal $n\pi$ for some natural number $n$. Then, 
+\[ k_n = \frac{n\pi }{L} \]
+Where we have added the subscript to indicate that $k$ may take on a discrete set of values, one for each $n\in\N$. This number $n$ indicates which ``mode" the string is in. The wavelength is then
+\[ \lambda_n  =\frac{2\pi}{k_n} = \frac{2L}{n}\]
+and the frequency is
+\[ \omega_n = ck_n = \frac{cn\pi }{L} \]
+remember that $c$ depends only on the physical properties of the string, and not on $n$. This statement won't be true later, when we explore dispersion, but it is a fine assumption for the time being. 
+
+We call the value that each of these quantities take with $n=1$ the ``fundamental" quantities (fundamental frequency, fundamental wavelength), and higher levels of $n$ correspond to multiplying by $n$ (or dividing by $n$). Technically, it is perfectly valid to plug in $n=0$ or negative values of $n$, but we will find that negative values correspond to negative frequencies which don't make physical sense, and $n=0$ corresponds to a trivial wave that just remains still at $\psi_0(x,t) = 0$
+
+Since the wave equation is linear, the most general motion of a string is a linear combination of each of the solutions corresponding to the natural numbers:
+\[ \psi(x,t) = \sum_{n=0}^\infty \psi_n(x,t) = \sum_{n=0}^\infty A_n\sin(\omega_n t+\phi_n)\sin(k_nx) \]
+We start the sum at $0$ instead of $1$ here even though $n=0$ contributes nothing. This is to make it consistent with the form of other standing waves, as we will soon see.
+
+Note that the amplitudes and phases of each of these waves can in general differ.
+
+You may be wondering how this framework accounts for non sinusoidal waves--after all, any function $f(x\pm ct)$ should solve the wave equation. This is a fantastic question, and we will in fact see that the above form is actually able to represent the wave form of any solution $f(x\pm ct)$ through Fourier analysis. 
+
+\textbf{One fixed end, one free end:} Now, we consider the case where one end of the rope is fixed and the other is free. Without loss of generality, suppose the fixed end is at $x=0$ and the free end is at $x=L$ (if it's the other way, just invert every calculation we perform). 
+
+The two boundary conditions are $\psi(0, t) = 0$ and $\pdvi{\psi}{x}|_{x=L} = 0$. As before, we have the most general standing wave satisfying the first condition is
+\[ \psi(x,t) = \cos(\omega t+\phi)\sin(kx) \]
+Then, $\pdvi{\psi}{x}$ is proportional to $\cos(kx)$, so we require that $\cos(kL) = 0$. This gives us that
+\[ k_n = \frac{(n+1/2)\pi}{L} \]
+Note that $n$ starts at zero here, since $n=0$ gives a nontrivial wave. 
+
+The wavelengths are then
+\[ \lambda_n = \frac{2\pi}{k_n} = \frac{2L}{n+1/2}\]
+and the frequencies are
+\[ \omega_n = ck_n = \frac{c(n+1/2)\pi}{L} \]
+Similar to the previous case, the most general form of wave is the superposition of each of these waves:
+\[ \psi(x,t) = \sum_{n=0}^\infty A_n \sin(\omega_n t+\phi_n)\sin(k_nx) \]
+
+\textbf{Two free ends:} Now, consider the case with two free ends. The two boundary conditions are $\pdvi{\psi}{x}|_{x=0} = 0$ and $\pdvi{\psi}{x}|_{x=L} = 0$. We already saw that the most general wave that satisfies the first of these conditions is
+\[ \psi(x,t) = A\cos(\omega t+\phi)\cos(kx) \]
+Then, $\pdvi{\psi}{x}$ is proportional to $\sin(kx)$ so we require that $\sin(kL) = 0$. This gives the same frequencies as the case with two fixed ends, so the wavenumbers are
+\[ k_n = \frac{n\pi}{L}\]
+and the wavelengths are
+\[ \lambda_n = \frac{2\pi}{k_n} = \frac{2L}{n} \]
+and the frequencies are
+\[ \omega_n = ck_n = \frac{cn\pi}{L} \]
+the $n=0$ case again has no frequency, and is simply a flat line, as $k_0=0$. But this is slightly less trivial than in the two fixed ends case, since generally $\psi_0(x,t) \ne 0$. So the $n=0$ case can serve as a constant offset for the wave. 
+
+Once again, the most general motion is a linear combination of each wave
+\[ \psi(x,t) = \sum_{n=0}^\infty A_n\cos(\omega_nt+\phi_n)\cos(k_nx) \]
+\subsection*{Power in a standing wave}
+For traveling waves, we previously saw that not only do they contain energy, but they contain an energy flow across the string--that is, they transmit power. Any given point on the string does work on the surrounding points, causing the energy to flow across the wave with time.
+
+A reasonable question to ask now is: is there energy flow in standing waves? There is certainly an energy density, since the string both stretches and moves. But is there any energy transfer along the string?
+
+Intuitively, a standing wave is the superposition of two traveling waves moving in opposite directions with equal amplitudes. These traveling waves have equal and opposite energy flow, so it is reasonable to expect the net energy flow of a standing wave to be, on average, zero. 
+
+Mathematically, we can reinforce this by calculating the energy flow. Suppose that we have a standing wave given by
+\[ \psi(x,t) = A\sin(\omega t)\sin(kx) \]
+Any combination of sines and cosines would work here and would give the same result. The power becomes
+\begin{align*}
+    P(x,t) = -F_y v_y &= \pqty{-T\pdv{\psi}{x}}\pdv{\psi}{t} \\
+    &= -T(kA\sin(\omega t)\cos(kx))(\omega A\cos(\omega t)\sin(kx)) \\
+    &= -TA^2\omega k (\sin kx \cos kx)(\sin \omega t\cos \omega t)
+\end{align*}
+This is generally nonzero, so there is indeed power flow across a given point. However, at a given value of $x$, the average power over a period becomes (I have used $\tau$ to denote period instead of $T$ to prevent a symbol overlap):
+\begin{align*}
+    \overline{P(x,t)} &= \frac{1}{\tau }\int_0^\tau P(x,t)\dd t \\
+    &= -\frac{1}{\tau}TA^2\omega k\sin kx\cos kx\int_0^\tau \sin \omega t\cos\omega t \dd t 
+\end{align*}
+It is relatively simple to see that this integral goes to zero (if you aren't convinced, it may be enlightening to take a glance at the next chapter, at the orthogonal functions section).
+
+To give some physical intuition behind this result, first consider the traveling wave. In a traveling wave, the transverse force that a given dot on the string applies to the section of string on its right is always in phase (or perfectly out of phase, depending on the direction of wave motion) with the velocity of the dot. This is represented with the relationship $\pdvi{\psi}{t} = \pm c\; \pdvi{\psi}{x}$. So the product of the force and the velocity is either always positive or always negative--there is no cancellation.
+
+But for a standing wave, the transverse force is proportional to $-\pdvi{\psi}{x} = -kA\sin\omega t\cos kx$ while the velocity is proportional to $\pdvi{\psi}{t} = \omega A\cos\omega t\sin kx$. At some fixed $x$ value, this means that the transverse force applied by the string follows $\sin\omega t$ and the force follows $\cos\omega t$--that is, they are exactly $90^\circ$ out of phase with one another. For half of the period, $\sin$ and $\cos$ have the same sign and for the other half, they have opposite signs. So the power transmitted during the half with the same sign perfectly cancels with the power transmitted during the half with opposing signs.
+\section{Attenuation}
+What happens if we add some damping force to a transverse wave on a string? This damping could arise, for example, by immersing the string in a viscous fluid. We will assume that this drag force depends linearly on the velocity of the string. So for the purposes of the drag force, we will assume that the string has some thickness that produces a drag force of $-(\beta \dd x)v_y$ on a length $\dd x$ of string, where $\beta$ is the drag coefficient per unit length. The larger the piece, the larger the drag force.
+
+Our new wave equation is found by taking the old wave equation (remember that the old wave equation was simply $F=ma$ rephrased) and tacking on the drag term. So, we have
+\[ (\mu \dd x)\pdv[2]{\psi}{t} = T\dd x \pdv[2]{\psi}{x} - (\beta \dd x)\pdv{\psi}{t} \]
+which may be rearranged to yield
+\[ \pdv[2]{\psi}{t} + \Gamma \pdv{\psi}{t} = c^2\pdv[2]{\psi}{x} \]
+where $\Gamma \equiv \beta / \mu$ is analogous to $\gamma$ in the analysis of damped harmonic motion.
+
+To solve this equation, we'll guess an exponential solution. Suppose we have a solution in the form
+\[ \psi(x,t) = De^{i(\omega t-kx)}\]
+Then, we can plug into the differential equation to find
+\begin{align*}
+    -\omega^2 De^{i(\omega t-kx)} + i\omega \Gamma De^{i(\omega t-kx)} &= -c^2k^2De^{i(\omega t-kx)}
+\end{align*}
+which simplifies down to
+\[ -\omega^2 + \Gamma(i\omega) = -c^2k^2 \]
+This tells us haw $\omega$ and $k$ are related, but it contain much information about what the motion looks like. This is because it can take various forms, depending on the boundary conditions.
+
+Consider the setup where the string has a left at $x=0$ with a right end extending off to infinity, and suppose that the left end of the string is driven up and down sinusoidally with a constant amplitude $A$. In this scenario, $\omega$ must be real, since if it was imaginary with $\omega = a+bi$, the $e^{i\omega t}$ factor in $\psi$ would have an exponentially decaying component $e^{-bt}$. But we're assuming a steady-state solution with amplitude $A$, so this cannot be the case.
+
+We can then write
+\[ k = \frac{1}{c}\sqrt{\omega^2-i\Gamma \omega} = K-i\kappa \]
+since $\omega$ is real, the imaginary part $\kappa$ is guaranteed to be nonzero. Let's consider the case of small damping. First rewrite $k$ as
+\[ k = \frac{\omega}{c}\sqrt{1 - \frac{i\Gamma}{\omega}}\]
+Since $\Gamma$ is small, we can expand this with a Taylor series:
+\begin{align*}
+    k &\approx \frac{\omega}{c}\pqty{1 - \frac{i\Gamma}{2\omega}} = \frac{\omega}{c} - i\frac{\Gamma}{2c}
+\end{align*}
+But this gives $K = \omega/c$ and $\kappa = \Gamma/(2c)$. Thus, plugging back into our wavefunction, we have
+\begin{align*}
+    \psi(x,t) = De^{i(\omega t-kx)} &= De^{i(\omega t -Kx + i\kappa x)} \\
+    &= De^{-i\kappa x}e^{i(\omega t-Kx)}
+\end{align*}
+This is quite familiar; with a fixed $t$ value, this looks like damped harmonic motion in terms of $x$. So as we get further and further from the point at $x=0$ where we wiggle the string, the amplitude decreases, following an envelope of $De^{-i\kappa x}$. Further, because the value of $\kappa$ is independent of $A$ and $\omega$, it doesn't matter how fast or strong we wiggle the rope--the envelope dies off at the same rate regardless.
+
+In the limit $\Gamma\to 0$ we find that $\kappa \to 0$ and so $k\to \omega/c$, which is simply the wavenumber for an undamped wave.
+
+% For a harmonic wave, we assume $\psi(x,0)= $, so in general we must have
+% \[ \psi(x,t) = a\sin\pqty{\
+% \frac{\omega}c(ct-x)}\]
+%     Assuming the wave is solely right-traveling. We then find
+% \[ \frac{\omega}{c} = \frac{2\pi \nu }{c} = \frac{2\pi}{cT} = \frac{2\pi}{\lambda} \]
+% where $\lambda \equiv cT$ is the \textbf{wavelength}. Then,
+% \[ \psi(x,t) = a\sin\pqty{\omega t - \frac{\omega}{c}x} = a\sin\pqty{\omega t -kx}\]
+% where $k\equiv \omega/c$ is the \textbf{wave number} (not the spring constant).
+
+% The kinetic energy of a section of string is
+% \[ T = \frac{1}{2} \dd m v_\text{transverse}^2 = \frac{1}{2}\mu \dd x\pqty{\pdv{\psi}{t}}^2\]
+% and the potential energy is
+% \[ V = T(\dd s -\dd x)\]
+% Previously, we made the approximation $\dd s \approx \dd x$. This was fine for the previous context, but now, we wish to include a somewhat more accurate approximation so we expand this to order 2. The reason we must do this is because we are considering the quantity $\dd s-\dd x$ which is much sensitive than just $\dd s$.
+% \begin{align*}
+%     \dd s = \sqrt{(\dd x)^2 + (\dd \psi)^2} &= \dd x \pqty{1+\pqty{\pdv{\psi}{x}}^2}^{1/2} \\
+%     &\approx \dd x\pqty{1+ \frac{1}{2}\pqty{\pdv{\psi}{x}}^2}
+% \end{align*}
+% Then, we can find an expression for the potential energy,
+% \begin{align*}
+%     V = T(\dd s-\dd x) &= T\, \frac{1}{2}\pqty{\pdv{\psi}{x}}^2\dd  x
+% \end{align*}
+% Considering a wavefunction of the form $\psi(x,t) = f(ct-x)$, we have $\partial \psi/\partial x = -f'(ct-x)$ and $\partial \psi/\partial t) = cf'(ct-x)$. Then,
+% \begin{align*}
+%     T &= \frac{1}{2}\mu \dd x \pqty{cf'(ct-x)}^2 \\
+%     &= \frac{1}{2}c^2\mu^2 (f')^2\dd x \\
+%     V &= \frac{1}{2}T\pqty{-f'}^2 \dd x\\
+%     &= \frac{1}{2} c^2\mu^2 (f')^2 \dd x
+% \end{align*}
+% Notably, we have $T=V$. Notably, they are \textit{not} out of phase, like they were for a single particle. The reason we find this is that we are only considering a small section of the spring. Energy is not conserved in just the small part we consider, even though it is conserved along the whole spring.
+
+% We will now consider the mean energy of the small section over one period of oscillation, assuming $\psi(t) = a\sin(\omega t -kx)$. This yields
+% \begin{align*}
+%     \overline E &= \int_{x}^{x+\dd x}\dd  x\frac{1}{T}\int_0^T c^2\mu^2 a^2\omega^2\cos(\omega t-kx)\dd t \\
+%     &= c^2\mu^2a^2\omega^2\dd x\frac{1}{T}\int_0^T \cos^2(\omega t-kx)\dd t \\
+%     &= \frac{1}{2}c^2\mu^2a^2\omega^2\dd x
+% \end{align*}
+% Now, consider the case where a wave transfers from one string of density $\mu_1$ and another of density $\mu_2$, both under the same tension $T$.
+
+% When the wave crosses the boundary, some of it gets reflected and some of it gets transmitted. The wave coming in is called the incident wave, the one passing through is the transmitted wave, and the one reflected is the reflective wave. 
+
+% To analyze the behavior of these waves, we will give some of the properties we expect. First, we expect
+% \[ \psi_i(x_0, t) + \psi_r(x_0, t) = \psi_t(x_0, t)\]
+% Where $x_0$ is the border between the mediums.
+
+% In other words, we expect continuity in the wave. We also expect the restoring force on either side to be equal, so
+% \[ \pdv{\psi_i}{x} + \pdv{\psi_r}{x} = \pdv{\psi_t}{x} \]
+% We will write each wavefunction in the form
+% \begin{align*}
+%     \psi_i(x,t) &= A_1e^{i(\omega t-k_1x)} \\
+%     \psi_r(x,t) &= Be^{i(\omega t+k_1x)} \\
+%     \psi_t(x,t) &= A_2e^{i(\omega t-k_2x)}
+% \end{align*}
+% Then we also have $\psi_i(0,0) = A_1$, $\psi_r(0,0)=B$, and $\psi_t(0,0) = A_2$. Thus, by the continuity condition
+% \[ A_1+B=A_2\]
+% And then 
+% \[ -k_1A_1 + k_1B= -k_2A_2 \]
+% these equations can be solved simultaneously to yield 
+% \[\frac{B}{A_1} = \frac{k_1-k_2}{k_1+k_2} \quad\quad \frac{A_2}{A_1} = \frac{2k_1}{k_1+k_2}\]
+% Plugging in $k_1 = \omega/c_1 = \omega/\sqrt{T/\mu_1} = \omega\sqrt{\mu_1/T}$ and similar for $k_2$,
+% \begin{align*}
+%     \frac{B}{A_1} &= \frac{\sqrt{\mu_1} - \sqrt{\mu_2}}{\sqrt{\mu_1}+\sqrt{\mu_2}} \\
+%     \frac{A_2}{A_1} &= \frac{2\sqrt{\mu_1}}{\sqrt{\mu_1}+\sqrt{\mu_2}}
+% \end{align*}
+% If $\mu_2$ is extremely large (such as if we reflect off of a wall), we have $B/A_1 = -1$ and $A_2/A_1 = 0$. Therefore, the wave is totally reflected and inverted.
+% \section{Standing Waves}
+% Consider a string with the fixed boundary conditions $\psi(0, t) = 0$ and $\psi(\ell, t)= 0$. We give the general solution of this wave as the superposition of a left and right travelling wave, so
+% \[ \psi(x,t) = ae^{i(\omega t - kx)} + be^{i(\omega t+kx)}\]
+% The left boundary condition tells us
+% \[ ae^{i\omega t} + be^{i\omega t} = 0\]
+% or $a=-b$. So,
+% \[ \psi(x,t) = ae^{i(\omega t-kx)} - ae^{i(\omega t+kx)} = ae^{i\omega t}(e^{-ikx}-e^{ikx}) \]
+% So
+% \[ \psi(x,t) = (-2ia)e^{i\omega t}\sin(kx)\]
+% redefining $-2ia\equiv A$, we have
+% \[ \psi(x,t) = Ae^{i\omega t}\sin(kx)\]
+% The right boundary condition then yields
+% \[ Ae^{i\omega t}\sin(k\ell) = 0\]
+% so we must have $k\ell = n\pi$, or $(2\pi/\lambda)\ell = n\pi$, then $\lambda = 2\ell/n$. This then yields $\omega = n\pi c/\ell$. 
+
+% Essentially, this analysis tells us that the boundary conditions necessitates the wave has only one of the \textbf{allowed frequencies} given by $\omega = n\pi c/\ell$. With $n=1$, we get the \textbf{fundamental frequency} and \textbf{fundamental wavelength}
+% \[ \lambda = 2\ell \quad\quad \omega = \pi c/\ell\]
+% All other allowed frequencies are integer multiples of the fundamental frequency and are called \textbf{harmonics}.
+
+% In the case where the right end is free to oscillate, $\mu_2\to 0$ and so we expect for the normal force to vanish. Thus,
+% \[ T\pdv{\psi}{x}\biggr|_{x=\ell} = 0\]
+% and then
+% \begin{align*}
+%     TAke^{i\omega t}\cos(k\ell) = 0
+% \end{align*}
+% thus $k\ell = (2n+1)\pi/2$ and so the fundamental wavelength becomes
+% \[ \lambda = 4\ell/(2n+1)\]
+% \subsection*{Energy Flow}
+% Recall that earlier we found the energy density of a transverse wave to be
+% \[ \dv{\overline E}{x} = \frac{1}{2}\mu \omega^2 A^2\]
+% Then, the energy flow is
+% \[ \text{energy flow}=\frac{1}{2}\mu\omega^2A^2c\]
+% So considering the same reflected wave scenario as previously,
+% \begin{align*}
+%     EF_i &= \frac{1}{2}\mu_1\omega^2A_1^2c_1 \\
+%     EF_r &= \frac{1}{2}\mu_1\omega^2B^2c_1 \\
+%     EF_t &= \frac{1}{2}\mu_2\omega^2A_2^3c_2
+% \end{align*}
+% So the fraction of the energy reflected is
+% \begin{align*}
+%     R &= \frac{EF_r}{EF_i} = \frac{B^2}{A_1^2} = \pqty{\frac{k_1-k_2}{k_1+k_2}}^2
+% \end{align*}
+% And the fraction transmitted is
+% \begin{align*}
+%     T &= \frac{EF_t}{EF_i} = \frac{\mu_2c_2}{\mu_1c_1}\frac{A_2^2}{A_1^2} = \frac{\mu_2c_2}{\mu_1c_1}\pqty{\frac{2k_1}{k_1+k_2}}^2
+% \end{align*}
+% We define the quantity $\mu c= Z$ as the \textit{impedance} of a medium. We also have $Z_2/Z_1 = k_2/k_1$ Then,
+% \[ T = \frac{Z_2}{Z_1}\pqty{\frac{2k_1}{k_1+k_2}}^2 = \frac{k_2}{k_1}\frac{4k_1^2}{(k_1+k_2)^2} = \frac{4k_1k_2}{(k_1+k_2)^2} \]
+% We also find
+% \begin{align*}
+%     T+ R &= \frac{4k_1k_2}{(k_1+k_2)^2} + \frac{(k_1-k_2)^2}{(k_1+k_2)^2} \\
+%     &= \frac{4k_1k_2 + k_1^2+k_2^2-2k_1k_2}{k_1^2+k_2^2+2k_1k_2} = 1
+% \end{align*}
+% In other words, the total energy of the system is conserved.
+% \subsection*{Superposition of Two Waves}
+% Consider a wave described by
+% \begin{align*}
+%     \psi(x,t) = \psi_1(x,t) + \psi_2(x,t) &= a\cos(\omega_1 t - k_1x)+a\cos(\omega_2 t-k_2x) \\
+%     &= 2a\cos\pqty{\frac{\omega_1-\omega_2}{2}t - \frac{k_1-k_2}{2}x}\sin\pqty{\frac{\omega_1+\omega_2}{2}t - \frac{k_1+k_2}{2}x}
+% \end{align*}
+% This is reminiscent of the phenomenon of \textbf{beat waves}, except now the beats are in both position and time instead of just in time.
+
+% We define the \textbf{group velocity} as $v_g = (\omega_1-\omega_2)/(k_1-k_2)$. In the special case where both waves have the same speed; if $\omega_1/k_1 =\omega_2/k_2$, we have
+% \[ c_1=c_2=v_g\]
+% If instead $v_g\ne c$, the envelope changes shape as the wave travels and the wave is called a \textbf{dispersive wave}.
+
+% For an example of a dispersive medium, return to the scenario with $n$ masses on a string. The equations of motion for this are, we should recall
+% \[ m\ddot y_r = \frac{T}{a}(y_{r-1}-2y_r + y_{r+1})\]
+% which yields, upon plugging in $y_r = Ae^{i(\omega t -kra)}$,
+% \begin{align*}
+%     -m\omega^2 &= \frac{T}{a}(e^{ika}+e^{-ika}-2) \\
+%     &= \frac{T}{a}(e^{ika/2}+e^{-ika/2})^2 \\
+%     &= \frac{T}{a} (2i\sin(ka/2))^2 \\
+%     &= -\frac{4T}{a}\sin^2\pqty{\frac{ka}{2}}
+% \end{align*}
+% So we find
+% \[ \omega^2 = \frac{4T}{ma}\sin^2\pqty{\frac{ka}{2}} \]
+% Clearly, $\dd \omega/\dd k \ne c$, so this medium is dispersive. However, if we assume $\lambda$ is large, $k$ is small so 
+% \[ \sin^2\pqty{\frac{ka}{2}} \approx \pqty{\frac{ka}{2}}^2\]
+% so
+% \begin{align*}
+%     \omega^2&\approx \frac{4T}{ma}\frac{k^2a^2}{4} \\
+%     &= \frac{Ta}{m}k^2
+% \end{align*}
+% so $\omega = k\sqrt{Ta/m}$ and 
+% \[ \dv{\omega}{k} = \sqrt{\frac{Ta}{m}} = \sqrt{\frac{T}{\mu}} = c\]
+% so the medium is nondispersive. Essentially, if there are \textit{many} masses, $\lambda$ becomes massive relative to $a$, so the approximation applies and the medium is nondispersive. That is, the dispersive property comes in when the system, from the point of view of the wave, looks like discrete masses.

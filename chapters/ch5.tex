@@ -1,0 +1,143 @@
+\chapter{Longitudinal Waves}
+We return now to our study of waves, this time considering \textbf{longitudinal waves}. Longitudinal waves occur when the points oscillate in the same direction as the direction of propagation, whereas transverse waves occur when the points oscillate perpendicular to the direction of propagation.
+
+Just like transverse waves, there is no actual net movement of the matter in a longitudinal wave--every point oscillates back and forth about some equilibrium point and has no net movement away from this equilibrium.
+\section{Springs and Masses, Revisited}
+Recall that the wave equation for a transverse wave was given by
+\[ \pdv[2]{\psi}{t} = c^2\pdv[2]{\psi}{x} \]
+A similar equation may be obtained for a transverse wave propagating along a large number of masses connected by springs, to find
+\[ \pdv[2]{\psi}{t} = \frac{E}{\mu}\pdv[2]{\psi}{x} \]
+Here, the constants are the elastic modulus $E$ and the mass density $\mu$. All of our analyses for transverse waves apply here, with the key distinction that now $\psi$ represents the \textbf{longitudinal} displacement from equilibrium, not the transverse displacement. 
+
+We will not go through the derivation for this alternate wave equation for spring and masses, and indeed we will hardly focus on springs and masses at all. Instead, we will consider \textbf{sound waves}.
+\section{Sound Waves}
+\subsection*{Notation}
+Sound is a longitudinal wave, in both position and pressure/density, as we will see. Sound can exist in solids, liquids, and gases, but we'll generally work with sound waves in air in this chapter. In air, molecules push and (effectively, relative to equilibrium) pull on each other, so the behavior is similar to that of a spring mass system.
+
+To emphasize the 1-D nature of the waves we are considering, imagine a thin tube of air inside a cylindrical container with a cross-sectional area $A$. Now, imagine a small section of air between two horizontal positions along the tube. Let the equilibrium positions of the endpoints of this section be denoted with $x$ and $x+\Delta x$. Then, the actual position of them at any given time is $x + \psi(x)$ and $x + \Delta x + \psi(x + \Delta x)$.
+
+If we define $\Delta\psi \equiv \psi(x + \Delta x) - \psi(x)$, then the right endpoint becomes $x + \Delta x + \psi(x) + \Delta \psi$. The quantity $\Delta \psi$ represents how much more the right endpoint moves compared to the left endpoint. Notice that $\Delta \psi \approx (\pdvi{\psi}{x})\Delta x$ for small $\Delta x$. In actual sound waves in air, $\Delta \psi$ is much less than $\Delta x$, so $\pdvi{\psi}{x}$ is small.
+
+We are considering $x$ to be the position of a given molecule at equilibrium. So even if a molecule has moved to some other position $x + \psi(x)$, we still denote the molecule as the molecule at position $x$.
+
+To obtain the wave equation, we will have to consider how the pressure interacts with the two ends of the given section of air. Air has some ``default" pressure $p_0$ that depends on quantities such as the altitude and density of the air. This pressure is applied equally throughout the entire gas, and so they all cancel out--this pressure causes no movement.
+
+Suppose that $\psi_p(x,t)$ is the \textbf{excess pressure} (above $p_0$) at some position $x$ and time $t$. We will allow $t$ to be fixed at some given value for this discussion and just write $\psi_p(x)$, but keep in the back of your mind that the excess pressure is not constant in time, and we are just considering a snapshot. 
+
+If the left boundary has a net pressure $p(x) = p_0 + \psi_p(x)$, then the right end has a net pressure $p(x + \Delta x) = p_0 + \psi_p(x + \Delta x)$. Defining, $\Delta \psi_p$ similar to how we defined $\Delta \psi$ before, we can write the pressure on the right end as $p(x + \Delta x) = p_0 + \psi_p(x) + \Delta \psi_p$. $\Delta \psi_p$ then represents how much the pressure at the right boundary exceeds the pressure at the left end. In practice, $\psi_p$ is much smaller than $p_0$ and $\Delta \psi_p$ is infinitesimally small, assuming that $\Delta x$ is infinitesimally small. Also note that $\Delta \psi_p \approx (\pdvi{\psi_p}{x})\Delta x$ for small $\Delta x$.
+\subsection*{The Wave Equation}
+Having introduced the necessary notation, we can now derive the wave equation for sound waves. This derivation consists of four main steps, so let's list them out now. Our strategy will be to find the net force on a given volume of air, and then write down the $F=ma$ equation for that volume.
+\begin{enumerate}
+    \item \textbf{How the volume changes:} First, we need to determine how the volume of a gas changes when the pressure is changed. We certainly expect this change to be proportional to the volume, and we will also see that the volume decrease is proportional to the pressure increase, provided the increase is small. So we expect a change in volume of $\Delta V = -\kappa V\psi_p$, where $\kappa$ is some positive proportionality constant.
+
+    This constant $\kappa$ is known as the \textbf{compressibility}--the larger $\kappa$ is, the more volume is compressed for a given change in pressure $\psi_p$. 
+
+    We also know that the volume is $A\Delta x$ (the difference in volume from $\psi$ is negligible compared to the total volume of the section; however, this approximation cannot be made for the change in volume, since the contribution from $\psi$ is the entire change). And so the change in volume may be equivalently written as $\Delta V = A\Delta \psi$. So, we have 
+    \[ \frac{\Delta V}{V} = -\kappa \psi_p \implies \frac{A\Delta x}{A\Delta \psi} = -\kappa \psi_p \implies \boxed{\pdv{\psi}{x} = -\kappa\psi_p}\]
+    The quantity $\pdvi{\psi}{x}$ indicates how the displacement from equilibrium grows as a function of $x$. So this relationship is essentially saying that the rate of displacement of a particle from equilibrium is growing when there is a negative excess pressure (i.e. there is less pressure than in the surrounding areas), and shrinking when there is a positive excess pressure. The severity of this growth/shrinking is based on how large $|\psi_p|$ is.
+    \item \textbf{Calculating the compressibility:} We will now be formal about our previous assertion that the change of volume is proportional to the pressure increase. In the course of doing this, we'll find the compressibility $\kappa$.
+
+    Let's first give a derivation that isn't quite correct. From the ideal gas law, we have $pV = nRT$. If the temperature $T$ is constant, than a change in pressure and volume must satisfy $(p + \dd p)(V + \dd V) = nRT$. Combining these two relationships, we have $(p+\dd p)(V + \dd V) - pV = 0$. Multiplying out the left side and discarding the second order $\dd p\dd V$ term, we have $V\dd p + p \dd V = pV$, so $\dd V = -(1/p)\dd p$. But $\dd p$ is exactly what we've been calling $\psi_p$, so $\dd V = -(1/p)\psi_p$. This gives the compressibility to be $\kappa = 1/p_0$ (assuming that $\psi_p$ is small compared to $p_0$).
+
+    But this is wrong. The critical misstep was our assumption that the temperature is constant. $T$ is \textbf{not} constant in a sound wave. The compression is what's called an \textbf{adiabatic process}. That is, the heat can't flow quickly enough to redistribute itself and even itself out. Essentially, the time scale of the heat flow is large compared to the time scale of the wave. So a region that heats up due to high pressure will remain hot until the pressure decreases back to equilibrium. 
+
+    The correct relation (which we will just accept as being true here) is that the quantity $pV^\gamma$ remains constant, where $\gamma$ is a dimensionless constant depending on the medium. For air, $\gamma$ happens to be about $7/5$. Taking the differential of this expression, we have
+    \[ \dd (pV^\gamma) = p\gamma V^{\gamma -1}\dd V + V^\gamma \dd p\]
+    But since $pV^\gamma$ is constant, its $\dd (pV^\gamma) = 0$. Thus, we rearrange the previous expression to find
+    \[ \dd V = -\frac{1}{\gamma p}V\dd p\]
+    So in reality, $\kappa = 1/(\gamma p_0)$, using the same assumption that $\psi_p \ll p_0$.
+    \item \textbf{Calculating the difference in pressure:} Although our previous results to depend on $\psi_p$, we are actually more concerned with the \textbf{change} in $\psi_p$ from one end of our small region to the other, $\Delta \psi_p$. To find this, recall the relationship
+    \[ \pdv{\psi}{x} = -\kappa \psi_p\]
+    If we differentiate both sides of this expression with respect to $x$, we find
+    \[ \pdv[2]{\psi}{x} = - \kappa \pdv{\psi_p}{x} \]
+    so we can rearrange and find that
+    \[ \Delta \psi_p = -\inv \kappa\pdv[2]{\psi}{x}\Delta x\]
+    Note that this relationship gives us an interesting feature of the pressure--if $\pdvi{\psi}{x}$ is constant, then so is the excess pressure--if the pressure is the same everywhere, the tube of air simply stretches uniformly.
+    \item \textbf{The wave equation:} We will now construct the $F=ma$ equation for this gas. The net force on the small section of air is the total pressure at the left minus the total pressure at the right end, all multiplied by the cross-sectional area $A$:
+    \[ F_\text{net} = A(p(x) - p(x + \Delta x)) = -A\Delta \psi_p\]
+    The mass of the small section is the density of air $\rho$ times the volume, so
+    \[ m = \rho V = \rho A \Delta x\]
+    and the acceleration is just $\partial^2 \psi/\partial t^2$. Thus, we obtain the relationship
+    \[ \rho A\Delta x \pdv[2]{\psi}{t} = -A\Delta\psi_p \]
+    Or, equivalently (taking the limit to turn $\Delta x$ into a $\dd x$),
+    \[ \rho \pdv[2]{\psi}{t} = -\pdv{\psi_p}{x} \]
+    However, recall the relationship $\psi_p = (-1/\kappa)\pdvi{\psi}{x}$. Therefore, we find the wave equation
+    \[ \rho\pdv[2]{\psi}{t} = \frac{1}{\kappa} \pdv[2]{\psi}{x}\]
+    and then plugging in $\kappa = -1/(\gamma p_0)$, we finally arrive at our final wave equation:
+    \[ \pdv[2]{\psi}{t} = \frac{\gamma p_0}{\rho} \pdv[2]{\psi}{x} \]
+    We see that this equation takes the exact same form as the wave equation for a transverse wave, with the $T/\mu$ coefficient replaced with the $\gamma p_0/\rho$ coefficient.
+\end{enumerate}
+We can carry over much of the same analysis we did on transverse waves. The speed of this wave is $c \equiv \sqrt{\gamma p_0/\rho}$. The solutions to this wave equation are the usual exponentials
+\[ \psi(x,t) = Ae^{i(\pm kx\pm \omega t)} \]
+where $\omega$ and $k$ satisfy $\omega/k = c$.
+
+As with all of the other equations we have encountered thus far, the speed of sound waves is independent of $\omega$ and $k$. In fact, if we plug in numbers for our $c$ expression, assuming $p_0$ is air pressure at sea level, we get precisely the speed of sound! Later, we will explore waves \textbf{without} the property where $c$ is independent of $\omega$.
+\section{Pressure waves}
+We have already found the wave equation for the displacement, $\psi$, from equilibrium for a single molecule. However, this is a microscopic property that is extremely difficult to measure. It would be convenient if we could find a similar expression governing the movement of a property that is easier for us to measure. As it turns out, the excess pressure $\psi_p$ is the perfect candidate for this.
+
+To find the new wave equation, first differentiate both sides of the wave equation for $\psi$,
+\[ \pdv{x} \pqty{\pdv[2]{\psi}{t}} = \frac{\gamma p_0}{\rho} \pdv{x} \pqty{\pdv[2]{\psi}{x}} \]
+Since partial derivatives commute, we can rewrite this as
+\[ \pdv[2]{t} \pqty{\pdv{\psi}{x}} = \frac{\gamma p_0}{\rho} \pdv[2]{x} \pqty{\pdv{\psi}{x}} \]
+But we already found that $\pdvi{\psi}{x} = -\kappa \psi_p$. This gives
+\[ -\pdv[2]{\psi_p}{t} = \frac{\gamma p_0}{\rho} \pdv[2]{\psi_p}{x} \]
+since the $-\kappa$s on each side cancel.
+
+This is the \textbf{same} wave equation as we found for the displacement $\psi$. So everything that is true of $\psi$ is also true for $\psi_p$, with the only difference being that $\psi_p$ lags behind $\psi$ by $90^\circ$ (in terms of $x$, not $t$) and the amplitude of $\psi_p$ is offset from the amplitude of $\psi$ by a factor of $1/\kappa$. Both of these facts come from $\pdvi{\psi}{x} = -\kappa \psi_p$.
+\section{Impedance}
+What is the impedance of air? In other words, what is the force per unit velocity that a given region applies to an adjacent region as a wave propagates?
+
+Suppose we have some traveling wave $\psi(x,t) = f(x \pm ct)$. The velocity of a ``sheet" of molecules with equilibrium position $x$ is simply $v(x) = \pdvi{\psi}{t}$. Then, the excess force is
+\[ F = A\psi_p = A\pqty{-\frac{1}{\kappa}\pdv{\psi}{x}}\]
+We have the usual traveling wave relationship $\pdvi{\psi}{t} = \pm\;  c\pdvi{\psi}{x}$. So we can write
+\[ F = A\pqty{\pm \frac{1}{\kappa c}\pdv{\psi}{x}} = \pm \frac{A}{\kappa c} \pdv{\psi}{t} \]
+So we define the impedance as the force per unit velocity $Z \equiv F/v = A/(\kappa c)$. We can make $A$ arbitrarily large, however, so when we talk about the impedance of air, we typically mean the impedance per unit area 
+\[ \frac{Z}{A} = \frac{1}{\kappa c}\]
+rewriting $\kappa = 1/(\gamma p_0)$ and $c = \sqrt{\gamma p_0/\rho}$, we have
+\[ \frac{Z}{A} = \frac{\gamma p_0\sqrt \rho}{\sqrt{\gamma p_0}} = \sqrt{\gamma p_0\rho} \]
+\section{Energy, Power}
+\subsection*{Energy}
+What is the energy of a sound wave? The kinetic energy density per unit volume is simply 
+\[ K_{\dd V} = \frac{1}{2}\rho \pqty{\pdv{\psi}{t}}^2\]
+and the kinetic energy per unit length along the tube is
+\[ K_{\dd x} = \frac{1}{2}A\rho \pqty{\pdv{\psi}{t}}^2 \]
+The potential energy density per unit length (or rather, the density of the increase in potential energy over equilibrium) is more complicated to derive so we will provide without proof that it is
+\[ U_{\dd x} = \frac{1}{2} A\gamma p_0 \pqty{\pdv{\psi}{x}}^2 \]
+Thus, we have a total energy density of 
+\begin{align*}
+    \mcl E(x,t) &= \frac{1}{2}A\rho \pqty{\pdv{\psi}{t}}^2 + \frac{1}{2}A\gamma  p_0\pqty{\pdv{\psi}{x}}^2 \\
+    &= \frac{1}{2}A\rho \pqty{\pqty{\pdv{\psi}{t}^2} + \frac{\gamma p_0}{\rho}\pqty{\pdv{\psi}{x}}^2} \\
+    &= \frac{1}{2}A\rho \pqty{\pqty{\pdv{\psi}{t}^2} + c^2 \pqty{\pdv{\psi}{x}}^2}
+\end{align*}
+This is the exact same result that we previously found for the energy density of a transverse wave, since $A\rho$ is the density per unit length, $\mu$. This is valid for an arbitrary wave, but considering the special case of a traveling wave allows us to find (with the same analysis as we did for transverse waves),
+\[ \mcl E(x,t) = A\rho\pqty{\pdv{\psi}{t}}^2\]
+So the energy density per unit volume is then $\mcl E/A = \rho (\pdvi{\psi}{t})^2$.
+\subsection*{Power}
+Consider a cross-sectional ``sheet" of molecules. At what rate does the air on the left of the sheet do work on the air on the right of the sheet? In a small amount of time, the amount of work done is $\dd W = F\dd \psi = (pA)\dd \psi$. The power is therefore
+\[ P = \pdv{W}{t} = (p_0 + \psi_p)A\pdv{\psi}{t} \]
+The $p_0 A\pdvi{\psi}{t}$ term averages out to zero over time, so we'll ignore it and focus solely on the $\psi_p$ term. We can rewrite $\psi_p = -(1/\kappa)(\pdvi{\psi}{x})$. But as usual, we also have $\pdvi{\psi}{x} = \mp (1/c)(\pdvi{\psi}{t})$. So the power is
+\[ P = A\psi_p \pdv{\psi}{t} = A \pqty{\pm \frac{1}{\kappa c}\pdv{\psi}{t}}\pdv{\psi}{t} = \pm \frac{A}{\kappa c}\pqty{\pdv{\psi}{t}}^2 \]
+But with $c = 1/\sqrt{\kappa \rho} \implies \kappa = 1/(\rho c^2)$, we find
+\[ P = \pm A\rho c \pqty{\pdv{\psi}{t}}^2\]
+but recall that $Z = A\rho c$, so we may also write
+\[ P = \pm Z \pqty{\pdv{\psi}{t}}^2\]
+In terms of the excess pressure $\psi_p$, this is
+\[ P = \pm Zc^2 \psi_p^2 = \pm \frac{A}{\rho c}\psi_p^2\]
+\section{Boundary Conditions}
+Consider a standing wave of the form
+\[ \psi(x,t) = A\cos(\omega t+\phi)\sin(kx) + B\cos(\omega t+\phi)\cos(kx) \]
+within a pipe.
+
+First, suppose the pipe is closed at one end, taken to be $x=0$. The air molecules at the closed end can't move into the ``wall," and they can't move away from it either (otherwise there would be a vacuum at the wall that immediately sucks the air molecules back). Thus, $x=0$ must be a node of the $\psi(x,t)$ wave. Thus we have a wave of the form
+\[ \psi(x,t) = A\cos(\omega t+\phi)\sin(kx) \]
+What does the pressure wave look like? Since $\psi_p = -(1/\kappa)\pdvi{\psi}{x}$, we have
+\[ \psi_p(x,t) = -\frac{Ak}{\kappa}\cos(\omega t+\phi)\cos(kx) \]
+Thus, notes of $\psi$ correspond to antinodes of $\psi_p$ and vice versa. 
+
+If we instead had an open end at $x=0$, then the boundary condition isn't quite as obvious. It turns out that an open end corresponds to an antinode of $\psi$. To see this, it will actually be easier to consider the pressure wave $\psi_p$. If we have a standing wave inside of the pipe, then there must be essentially no wave outside of the pipe, so the excess pressure outside the pipe must be zero. And since the pressure must be continuous, the excess pressure must be zero at the open end. So an open end corresponds to a node of $\psi_p$, which means that it is a node of $\psi$.
+
+Thus, we have a wave of the form
+\[ \psi(x,t) = B\cos(\omega t+\phi)\cos(kx)\]
+and a pressure wave of the form
+\[ \psi_p(x,t) = \frac{Bk}{\kappa}\cos(\omega t+\phi)\sin(kx)\]
+In general, an open end corresponds to a node of $\psi$ and a closed end corresponds to an antinode of $\psi$ (a node of $\psi_p$). With this knowledge, it is quite easy to construct the form of standing with closed/open, closed/closed, or open/open boundary conditions.

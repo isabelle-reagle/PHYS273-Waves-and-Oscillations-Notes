@@ -1,0 +1,104 @@
+\chapter{2D Waves and Other Topics}
+\section{2D Waves on a Membrane}
+Previously, we studied transverse waves on a one-dimensional string. Let's now look at transverse waves on a two-dimensional membrane, such as a soap film with a wire boundary. 
+
+Suppose the equilibrium position of the membrane is the $xy$ plane. So $z$ is the transverse direction. Consider a little rectangle in the $xy$ plane with side lengths $\Delta x$ and $\Delta y$. During the wave motion, the patch of membrane corresponding to this rectangle will be displaced in the $z$ direction. But since we assume the transverse displacements are small, this patch is still approximately a rectangle. But it is slightly curved, and this curvature causes there to be a net transverse force, just as was the case for a 1-D string. The only difference is, as we will see, that we have ``double" the effect because the membrane is two-dimensional. 
+
+The smallness of the slope ensures that all points on the membrane move only in transverse direction--there is no motion parallel to the $xy$ plane. This implies that the mass of the slightly tilted patch is always, to a good approximation, equal to $\sigma\Delta x\Delta y$, where $\sigma$ is the mass density per unit area.
+
+Let the surface tension be $S$. The units of surface tension are force/length. Any line segment of length $\dd\ell$ on the membrane has one end exerting force of magnitude $S\dd\ell$ on the other. So the forces on the sides of our little rectangle are $S\Delta x$ and $S\Delta y$.
+
+The net force in the $z$ direction due to the forces on either side of the $y$ boundary is
+\begin{align*}
+    F &= S\Delta y \pqty{z'(x + \Delta x) - z'(x)} \\
+    &= S \Delta y \Delta x \frac{z'(x + \Delta x) - z'(x)}{\Delta x} \\
+    &\approx S\Delta y\Delta x \pdv[2]{z}{x}
+\end{align*}
+A similar analysis gives the force from the sides of the $x$ boundary as $F = S \Delta y\Delta x \; \partial ^2 z/\partial y^2$. The total transverse force is the sum of these two results, so the net force is
+\[ F = S \Delta y \Delta x \nabla^2 z\]
+($\nabla$ only includes the spatial derivatives of $z$). Since the mass is $m = \sigma \Delta y\Delta x$, we obtain a wave equation of
+\[ \pdv[2]{z}{t} = \frac{S}{\sigma} \nabla^2 z\]
+or, defining $c^2 \equiv S/\sigma$,
+\[ \pdv[2]{z}{t} = c^2\nabla^2z\]
+This looks extremely similar to our old wave equation with one spatial coordinate (in fact, if we let $\nabla^2 = \pdv[2]{x}$ in 1-D, they are \textit{exactly} the same, except for the constants out front)
+
+To find solutions to this, we can write $z(x,y,t)$ in terms of its Fourier decomposition,
+\[ z(x,y,t) = \int_{-\infty}^\infty\int_{-\infty}^\infty\int_{-\infty}^\infty \hat z(k_x, k_y, \omega)e^{i(k_xx+k_yy+\omega t)}\dd k_x\dd k_y\dd\omega\]
+Since the wave equation is linear, it is sufficient to guess solutions in the form $e^{i(k_xx+k_yy+\omega t)}$ Plugging this into the wave equation yields the relationship
+\[ \omega^2 = c^2(k_x^2+k_y^2) \]
+This looks similar to the dispersionless relationship $\omega^2 = c^2k^2$ in 1-D, but with an extra $k$ value added to the end. This modification has a large consequence: in the 1-D case, only one $k$ value corresponded to each $\omega$. But in 2-D, we may have any $(k_x, k_y)$ pair that satisfies $c(k_x^2+k_y^2) = \omega^2$. This creates a circle of possible $(k_x,k_y)$ values in the $k_xk_y$ plane with radius $\omega/c$. 
+
+With arbitrarily-shaped boundaries, this gets very complicated very quickly. So we assume that the boundary is a rectangle. Suppose that the boundary has lengths $L_x$ and $L_y$ in the $x$ and $y$ locations, and let one corner be at the origin.
+
+Our boundary condition is that we must have $z=0$ on the boundary of the wire. Let's now switch from exponential solutions to trig solutions, which are easier to work with here. We can write these solutions in many ways, but let's choose the basis where $z(x,y,t)$ takes the form
+\[ z(x,y,t) = A\trig(k_xx)\trig(k_yy)\trig(\omega t)\]
+Similar to the 1-D case, the $z(x, 0,t)=0$ and $z(0,y,t)=0$ conditions allow us to narrow down to 
+\[ z(x,y,t) = A\sin(k_xx)\sin(k_yy)\cos(\omega t+\phi) \]
+(the $t$ exchange to a cosine is possible due to the phase). The boundary conditions $z(x,L_y,t) =0$ and $z(L_x, y, t) =0 $ also narrow the allowed wavenumbers to
+\[ k_x = \frac{\pi n}{L_x} \quad\quad k_y = \frac{\pi n}{L_y}\]
+The most general form for $z(x,y,t)$ is a sum of these solutions, so we have
+\begin{align*}
+    z(x,y,t) = \sum_{n,m\in \N} A_{n,m}\sin\pqty{\frac{2\pi nx}{L}}\sin\pqty{\frac{2\pi my}{L}}\cos(\omega_{n,m}t+\phi_{n,m})
+\end{align*}
+where $\omega_{m,n}$ is defined with
+\[ \omega_{n,m}^2 = c^2 \bqty{\pqty{\frac{\pi n}{L_x}}^2 + \pqty{\frac{\pi n}{L_y}}^2}\]
+each basis solution in this sum is a standing wave, and the constants $A_{n,m}$ and $\phi_{n,m}$ are determined by the initial conditions of the wave. Note that if we have a square with $L_x=L_y=L$, then pairs of integers $(n,m)$ yield identical frequencies as long as $n_1^2+m_1^2 = n_2^2+m_2^2$. 
+
+What do these modes look like? Consider, for example, the $(3,2)$ mode. We have
+\[ z(x,y,t) = A_{3,2}\sin\pqty{\frac{3\pi x}{L_x}}\sin\pqty{\frac{2\pi y}{L_y}} \cos(\omega_{3,2}t + \phi_{3,2}) \]
+The nodes of this are along $x = 0, L_x/3, 2L_x/3$ and $L_x$ and $y = 0, L_y/2$, and $L_y$. Crossing any node causes the sign to flip. This essentially divides the region into several rectangular sub-regions, each with the same sign. As time advances, eventually the entire wave equals zero simultaneously, when $\cos(\omega_{3,2}t + \phi_{3,2}) = 0$. After this point in time, the signs of each sub-region flip.
+
+Notice that the frequencies $\omega_{m,n}$ are in general \textbf{not} simple multiples of each other, and are in fact often irrational. For instance, if $L_{x}=L_{y} = L$, then the frequencies take the form
+\[ \omega_{m,n} = \frac{\pi}{L}\sqrt{\frac{S}{\sigma}} \sqrt{n^2+m^2} \]
+The other boundary that is reasonable to deal with is a circle, using
+\[ \nabla^2 = \pdv[2]{r} + \frac{1}{r}\pdv{r} + \frac{1}{r^2}\pdv[2]{\theta} \]
+The solutions to this equation are not as simple as they are in the Cartesian case, and they involve a special type of solution known as Bessel functions. But this is left as an exercise for an interested reader. 
+\section{The Doppler Effect}
+\subsection*{Derivation}
+When we talk about the frequency of a wave, we normally mean the frequency as observed in a frame in which the air (or whatever other medium is relevant) is at rest. But what if the source or the observer were moving with respect to the air?
+
+\textbf{Moving source:} Suppose you are standing at rest on a windless day, and a car with a sound source on it (for instance, a siren) is moving straight towards you with speed $v_s$. The source emits sound; that is, pressure waves. Let the frequency in the source's frame of reference be $f$ Hz. Consider two successive maxima on the pressure wave, separated by some time $t=1/f$. In the time between emitting the first and second maxima, the car has moved a distance $v_st$. Also during this time $t$, the wave has traveled a distance $ct$, where $c$ is the wave speed. 
+
+So the second maximum is only a distance $d = ct - v_st$ behind the first maximum, instead of the $ct$ distance it would be if the source were at rest. The wavelength is therefore smaller. 
+
+The time between the successive arrivals at your ear for the two successive maxima is $T = d/c = (c - v_s)t/c$. So to your ear, the frequency appears to be
+\[ f_\text{ms} = \frac{1}{T} = \frac{c}{c-v_s}f \]
+This result is only valid for $v_s<c$; we'll explore the $v_s\ge c$ case later.
+
+If $v_s=0$, then we find $f_\text{ms} = f$, as expected. And if $v_s\to c$, $f_\text{ms} \to \infty$. This makes sense, since the pressure maxima are separated by effectively zero distance. 
+
+This equation is also valid for a negative $v_s$, which represents the case where the car moves away from the observer. As $v_s\to -\infty$, we see that $f_\text{ms} \to 0$. This makes sense, since the pressure maxima are very far apart.
+
+\textbf{Moving observer:} Let's now have the source be stationary but the observer moving directly towards it with a speed $v_o$. The distance between the successive maxima relative to the ground is just $ct$, but relative to you, but the gap is now closed at a rate $c + v_o$. Thus the time between successive maxima is $T = ct/(c + v_o)$, and the frequency you observe is 
+\[ f_\text{mo} = \frac{1}{T} = \frac{c+v_o}{c}f\]
+This result is valid for $v_o > -c$. If $v_o<-c$, then you are moving faster than the pressure waves and they can never catch up to you. In the boundary case $v_o=-c$, we find $f_\text{mo}=0$, which makes sense. 
+
+If $v_o=0$, then we of course have $f_\text{mo} = f$, and if $v_o=c$, then $f_\text{mo} = 2f$.
+
+\textbf{Both:} If both you and the observer are moving, the distance between successive maxima is $ct - v_st$ and the gap is being closed at a rate $c + v_o$. So the overall effect on the frequency is
+\[ f_\text{mso} = \frac{c+v_0}{c-v_s} f\]
+In the case where the observed frequency is less than $f$, we say that the wave is \textbf{redshifted}, and if the observed frequency is higher than $f$, we say that it is \textbf{blueshifted}. This terminology comes from how the Doppler effect applies to light waves, where red light is at the low frequency end of the visible light spectrum and blue light is at the high end.
+\subsection*{Relativity}
+The Doppler effect runs into an issue in the context of relativity. If a source moves towards you with a speed $v$ and emits a certain frequency of light, then the frequency you observe must be the same as it would be if instead you were moving toward the source with speed $v$. This follows from one of the postulates of relativity, which states that there is no preferred reference frame; all that matters is the relative speed.
+
+It is critical that we are talking about a light wave here, because light requires no medium to propagate in. If we were talking about sound waves, then the air be the preferred frame, since it is the medium. 
+
+Both of our previous results for the Doppler effect are invalid for relativistic speeds. Let's label both $v_s$ and $v_o$ from the above scenarios as just $v$.
+
+In the ``moving source" setup, the frequency of the source in your frame is now $f/\gamma$, where $\gamma = 1/\sqrt{1-v^2/c^2}$ is the \textbf{Lorentz factor}. This difference happens because in your frame, the source's clock runs slow due to time dilation. $f/\gamma$ is the frequency in your frame with which the phase of the light wave passes through any given value, \textbf{as it leaves the source}. But just as before, this is not the frequency you observe. The same analysis as before (just with $f$ replaced with $f/\gamma$) allows us to find that the observed frequency is
+\[ f_\text{ms} = \frac{c}{c-v}\frac{f}{\gamma}\]
+In the ``moving observer" setup, the frequency as measured in the source's frame is just $f$. But your clock runs slow in the source's frame, due to time dilation. So the frequency you observe is $f\gamma$. Then, the same analysis as before with $f$ replaced with $f\gamma$ gives
+\[ f_\text{mo} = \frac{c-v}{c} f\gamma \]
+but we require these two results be equal. So we set them equal to each other and find
+\begin{align*}
+    \frac{c}{c-v}\frac{f}{\gamma} &= \frac{c+v}{c}f\gamma
+\end{align*}
+which yields
+\[ \gamma^2 = \frac{c^2}{(c^2-v^2} = \frac{1}{1-v^2/c^2}\]
+which we know to be true.
+\subsection*{Shock Waves}
+Let's return to the world of nonrelativistic physics. In the ``moving source" setup above, we noted that the result isn't valid if $v_s > c$. So what happens in this case. Since the source is moving faster than the sound, the source gets to the observer \textbf{before} the previously-emitted wavefronts. 
+
+This creates a "shock wave" that forms a cone with the source at its tip. At the edge of this cone, the phases of waves emitted at different times are equal, and they constructively interfere. This causes the amplitude of the wave on the surface of the cone to get vey large, and someone standing off to the side will hear a loud ``sonic boom" when the wave passes by. 
+
+The half angle of the cone is given by $\sin\theta = c/v$ and so the full angle is $2\theta = 2\sin^{-1}(c/v)$. The larger $v$ is, the narrower the cone becomes. If $v\to\infty$, then $\theta\to 0$ and if $v=c$, then $\theta  = \pi$, so the cone is very wide, to the point of just being a straight line. 

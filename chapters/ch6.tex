@@ -1,0 +1,78 @@
+\chapter{Dispersion}
+So far, we have only considered the behavior of ``dispersionless" waves--that is, waves whose speed is independent of $\omega$ and $k$. In all of the waves we've studied, we have obtained a wave equation of the form 
+\[ \pdv[2]{\psi}{t} = c^2\pdv[2]{\psi}{x} \]
+where $c$ is a property of the system, not the properties of any individual wave. Solutions to these equations can be built from exponential functions $\psi(x,t) = Ae^{i(kx\pm \omega t)} $. Plugging this into the wave equation yields
+\[ \omega^2 = c^2k^2\]
+This is the so-called \textbf{dispersion relation} for the above wave equation. But as we'll see, it is somewhat of a trivial dispersion relation, in the sense that there is no dispersion.
+
+The velocity of the wave is $\omega/k = \pm c$, which is independent of $\omega$ and $k$. More precisely, this is the \textbf{phase velocity} of the wave, where the qualifier phase comes from the fact that the speed of a sinusoidal wave $\sin(kx-\omega t)$ is found from seeing how fast a point with constant phase $kx-\omega t$ moves. So the phase velocity comes from setting
+\[ kx - \omega t = \text{constant} \implies \dv{t} (kx-\omega t) =0 \implies k\dv{x}{t} - \omega = 0 \implies \dv{x}{t} = \frac{\omega}{k} \]
+However, not all systems have the property that the phase velocity $\omega/k$ is constant. In particular, for more complicated systems we have to consider a quantity called the \textbf{group velocity}. One type of wave for which this is the case is the case of discrete masses on a string.
+\section{Beads on a String}
+Consider a system composed of many beads of mass $m$ on a massless string with constant tension $T$. Suppose the each bead is separated by a distance $\ell$ and that the system extends endlessly in both directions.
+
+As we previously found, the $F=ma$ equation for a the $n$th mass is given by
+\[ \ddot \psi_n = \omega_0^2(\psi_{n+1} - 2\psi_n + \psi_{n-1})\]
+where $\omega_0^2 = T/(m\ell)$. We can carry over \textbf{all} of the results from when we previously considered this system, with the slight exception that instead of the index $n$, we find it convenient to work in terms of the position $x$ along the string.
+
+The solutions we found for this system are all linear combinations of functions in the form
+\[ \psi_n(t) = \operatorname{trig}(n\theta)\operatorname{trig}(\omega t)\]
+$\theta$ can take on a continuous set of values, because we assume for now that the string extends infinitely in both directions; there aren't any boundary conditions to restrict $\theta$. $\omega$ can also take on a continuous set of values but it must be related to $\theta$ by
+\[ 2\cos\theta = \frac{2\omega_0^2 - \omega^2}{\omega_0^2} \implies \omega = 2\omega_0 \sin\pqty{\frac{\theta}{2}}\]
+We now switch from the $n\theta$ notation to the more common $kx$ notation--but just keep in the back of your mind that we only care about $x$ when it is a multiple of $\ell$, since those are the locations of the beads. We define $k$ by
+\[ kx \equiv n\theta \implies k(n\ell) = n\theta \implies k\ell=\theta\]
+Where $x=0$ corresponds to the location of the $n=0$ bead. The $\psi_n(t)$ equation then becomes
+\[ \psi_n(t) = \operatorname{trig}(kx)\operatorname{trig}(\omega t)\]
+In the old notation, $\theta$ gave a measure for how fast the wave oscillated as a function of $n$. In the new notation, $k$ gives a measure of how fast the wave the function moves as a function of $x$. $k$ and $\theta$ simply differ by a factor of $\ell$. We also see that $\omega$ and $k$ are related by the equation
+\[ \omega(k) = 2\omega_0 \sin\pqty{\frac{k\ell}{2}} \]
+This is the \textbf{dispersion relation} for the beaded string system. This looks quite different than our $\omega(k) = ck$ relation for a continuous string, but we will soon see that they agree in the limit $\ell\to 0$.
+
+What is the phase velocity of a wave with wavenumber $k$? The velocity is still $\omega/k$, so we have
+\[ c(k) = \frac{\omega(k)}{k} = \frac{2\omega_0\sin(k\ell/2)}{k}\]
+The main thing of note here is that this velocity depends on $k$, unlike in the dispersionless systems of previous chapters. 
+
+In the limit of very small $\ell$, we approach a continuous string, so we expect $c(k)$ to become constant as $\ell \to 0$. Taking the limit, we see
+\begin{align*}
+    \lim_{\ell\to0} c(k) = \lim_{\ell\to 0}\omega_0 \ell \frac{\sin(k\ell/2)}{k\ell/2} = \lim_{\ell\to 0} \sqrt{\frac{\ell T}{m}} \frac{\sin(k\ell/2)}{k\ell/} \sqrt{\frac{T}{\mu}} = \sqrt{\frac{T}{\mu}}
+\end{align*}
+as expected. Note that the whenever $k\ell \ll 1$, this becomes true to a reasonable approximation. This can be rewritten as $\ell \ll \lambda$. In other words, the string acts like a continuous string whenever the spacing between the beads is much smaller than the wavelength of the wave in question.
+\section{Group Velocity}
+Whether a system is dispersionless or dispersionful, the phase velocity is simply $v_p = \omega/k$. This gives the speed of a \textbf{single} traveling sinusoidal wave. But consider the case of a lone bump, which (from Fourier analysis) can be written as the sum of many sinusoidal waves. If the system is dispersionless, all of the wave components move with the same speed $v_p$, so the bump also moves with this speed. 
+
+But for a dispersionful system, then $\omega/k$ depends on $k$ and $\omega$, so the different sinusoidal waves that make up the bump travel at different speeds. So its unclear what the speed of the bump is, or even if the bump \textbf{has} a well-defined speed. It turns out that it does in fact have a well defined speed, and it is given by the slope of the $\omega(k)$ curve:
+\[ v_g = \dv{\omega}{k} \]
+This is called the \textbf{group velocity}. This name comes from the fact that a bump is made up of a \textit{group} of Fourier components, as opposed to a single sinusoidal wave. Although every component of this wave travels at a different speed, we find that they all conspire in such a way that their sum (the bump) moves with speed $v_g = \dvi{\omega}{k}$.
+
+However, an unavoidable consequence of the differing speeds of the component is that as time goes on, the bump shrinks in height and spreads out in width, until you can hardly tell that it's a bump.
+\subsection*{Derivation}
+Although we introduced the idea of a group velocity by talking about the speed of many different Fourier coefficients, it is sufficient to consider only two waves. Such a system has all of the properties needed to derive the group velocity. So consider the following two traveling waves:
+\begin{align*}
+    \psi_1(x,t) &= A\cos(\omega_1 t - k_1x) \\
+    \psi_2(x,t) &= A\cos(\omega_2 t - k_2x) 
+\end{align*}
+The two waves having equal amplitudes is not necessary, but it simplifies the discussion. The total wave is the sum of these two waves:
+\[ \psi(x,t) = \psi_1(x,t) + \psi_2(x,t) = A\cos(\omega_1t -k_1x) + A\cos(\omega_2t-k_2x) \]
+Then, define the quantities
+\[ \omega_+ \equiv \frac{\omega_1 + \omega_2}{2} \quad \omega_- \equiv \frac{\omega_1-\omega_2}{2} \quad k_+ \equiv \frac{k_1+k_2}{2} \quad k_- \equiv \frac{k_1-k_2}{2}\]
+We can rewrite the sum of the waves as
+\begin{align*}
+    \psi(x,t) &= A\cos\biggr( (\omega_+ + \omega_-)t - (k_+ + k_-)x \biggr) + A\cos\biggr( (\omega_+ - \omega_-)t - (k_+-k_-)x\biggr) \\
+    &= A\cos\biggr( (\omega_+ t - k_+ x) + (\omega_- t - k_- x) \biggr) + A\cos\biggr( (\omega_+ t- k_+t) - (\omega_-t - k_-x)\biggr)
+    \intertext{With the identity $\cos(a\pm b) = \cos a\cos b \mp \sin a\sin b$,}
+    \psi(x,t) &= 2A\cos(\omega_+ t - k_+ x)\cos(\omega_- t - k_- x)
+\end{align*}
+That is, the sum of two traveling waves can be written as the product of two other traveling waves. 
+
+This is a very general result for any values of $\omega_1$, $\omega_2$, $k_1$, and $k_2$. But now let's consider the special case where $\omega_1$ is very close to $\omega_2$. Then, $\omega_+\gg \omega_-$ and $k_+ \gg \omega_-$. Under these conditions, the sum $\psi_1 + \psi_2$ has a very quickly moving wave (in both space and time) from the $\cos(\omega_+ t - k_+x)$ term and a slowly-moving envelope from the $\cos(\omega_-t -k_-x)$ term.
+
+The speed of the quick wave is $\omega_+/k_+$ which, under the assumption $\omega_1\approx \omega_2$, is approximately equal to $\omega_1/k_1$ and $\omega_2/k_2$. So the phase velocity of the wiggling wave is essentially equal to the phase velocity of either wave.
+
+The velocity of the envelope is 
+\[ \frac{\omega_-}{k_-} = \frac{\omega_1-\omega_2}{k_1-k_2} \]
+(note that this may be negative, even if the phase velocities for both original waves are positive). In a dispersionless wave, $\omega = ck$ and this reduces simply down to $\omega_-/k_- = c$. So the group velocity equals the phase velocity and is independent of $k$. But what if $k$ and $\omega$ aren't related linearly? 
+
+Suppose $\omega$ is given by a function $\omega(k)$, and suppose $k_1\approx k_2$. Then, 
+\[ \frac{\omega_1 - \omega_2}{k_1-k_2} = \frac{\omega(k_1) - \omega(k_2)}{k_1 - k_2} \approx \dv{\omega}{k}\]
+This is the velocity formed by the envelope of the two waves, and is the group velocity for the superposition of these two waves. In summary, then,
+\[ v_p = \frac{\omega}{k}\quad \text{and}\quad v_g = \dv{\omega}{k} \]
+In general, both of these velocities are functions of $k$, and are in general not equal. The linear relation $\omega = ck$ is a convenient, but ultimately non-universal, simplification.

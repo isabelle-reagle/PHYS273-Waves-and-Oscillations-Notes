@@ -182,7 +182,7 @@ Because of how we defined $\omega_m$, we see that $2\omega_0$ is the largest pos
 \[ \omega_0 = \sqrt{\frac{T}{ma}} = \frac{1}{a} \sqrt{\frac{T}{m/a}} = \frac{1}{a}\sqrt{\frac{T}{\mu}}\]
 where we defined $\mu\equiv m/a$ as the linear mass density.
 
-\subsection{$N\to\infty$}
+\subsection*{$N\to\infty$}
 Letting $N\to\infty$, we can rephrase our $y_r$s as a function of a continuous position $x$, giving an equation of motion 
 \begin{align*}
     m\pdv[2]{y}{x} &= \frac{T}{m}\pqty{\frac{y(x+\Delta x)-y(x)}{\Delta x} + \frac{y(x)-y(x-\Delta x)}{\Delta x}} \\
@@ -191,4 +191,5 @@ Letting $N\to\infty$, we can rephrase our $y_r$s as a function of a continuous p
     \frac{m}{\Delta x} \pdv[2]{y}{t} &= T\pdv[2]{y}{x} \\
     \mu\pdv[2]{y}{t} &= T\pdv[2]{y}{x}
 \end{align*}
-This is the \textbf{wave equation}.
+This is the \textbf{wave equation}. We can note that the quantity $\sqrt{T/\mu}$ has units of velocity, so we can define the velocity of the wave as $c^2\equiv T/\mu $, and write
+\[ \pdv[2]{y}{t} = c^2\pdv[2]{y}{x} \]

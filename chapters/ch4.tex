@@ -1,0 +1,242 @@
+\chapter{Fourier Series, Fourier Transform}
+Fourier analysis is the study of decomposing general functions into many trigonometric or exponential functions. There are two main branches to fourier analysis,
+\begin{enumerate}
+    \item \textbf{Fourier series:} If a reasonably well-behaved function is periodic, then it can be written as a discrete sum of trigonometric or exponential functions with specific frequencies.
+    \item \textbf{Fourier transform:} A general, reasonably well-behaved, but not necessarily periodic, function can be written as a continuous integral of trigonometric or exponential functions with a continuum of possible frequencies.
+\end{enumerate}
+The principle that makes fourier analysis so useful is that many of the equations governing physics are \textit{linear}, so the superposition of any two solutions is a solution. 
+
+Thus, if we can write
+\[ f(t) = \sum c_n f_n(t) \]
+for some sequence of functions $(f_n)$ where each $f_n$ solves some given differential equation, $f(t)$ gives a much more general solution to that equation.    
+\section{Fourier Trigonometric Series}
+Fourier's theorem allows us to write any reasonably well-behaved function in terms of trigonometric or exponential functions. I will not supply a general proof of Fourier's theorem (see a text on analysis). We will derive the equationg given the fact that it a solution indeed exists. 
+
+Consider some function $f(x)$ that is periodic with some interval $0 \le x \le L$. Note that for any function $f$ defined only over some interval $(a,b)$, we can simply extend $f$ to the reals, repeating it infinitely in both directions. This causes $f$ to be periodic.
+
+Fourier's theorem says that we can write, for some coefficients $a_0, (a_n), (b_n)$,
+\[ f(x) = a_0 + \sum_{n\in\N} \bqty{a_n\cos\pqty{\frac{2\pi nx}{L}} + b_n\sin\pqty{\frac{2\pi nx}{L}}}\]
+The $a_0$ term is thrown outside of the sum simply for convention's sake--we could easily absorb it into the sum if we so desired. Before we can calculate the values of these coefficients, we shall take a brief aside to consider the idea of \textbf{orthogonal functions}.
+\subsection*{Orthogonal Functions}
+Let $m$ and $n$ be natural numbers, and consider the integral
+\[ \int_0^L \sin\pqty{\frac{2\pi nx}{L}}\cos\pqty{\frac{2\pi mx}{L}}\dd x\]
+To simplify the formulas in this section, we will introduce the parameter $\xi = (2\pi x)/L$.
+
+We can use the product of trig functions identity to rewrite this integral.
+\begin{align*}
+   \frac{1}{2}\int_0^L \bqty{\sin\pqty{\xi (n+m)}+\sin\pqty{\xi (n-m)}}\dd x 
+\end{align*}
+Notice that both terms in the integrand undergo a whole number of cycles between $0$ and $L$, and so their integral is zero (this can also be seen if you evaluate the integrals). The one exception is when $m=n$, but then the $\sin$ term is identically zero anyway.
+
+Now, we consider a slightly different integral:
+\[ \int_0^L \cos\pqty{\xi n}\cos\pqty{\xi m}\dd x\]
+The product of cosines identity lets us rewrite this as
+\[ \frac{1}{2}\int_0^L \bqty{\cos\pqty{\xi (n+m)} + \cos\pqty{\xi (n-m)}}\dd x\]
+Notice that as long as $n\ne m$, both of these terms undergo a whole number of cycles between $0$ and $L$ and so their integral is zero. But when $n=m$, we find a different story. The $n-m$ term goes to zero, and the integral reduces to
+\[ \frac{1}{2}\int_0^L \bqty{\cos\pqty{2\xi n} + \cos(0)}\dd x\]
+The left term still undergoes a whole number of oscillations, and is also zero. But the left term is just $1$, so the integral evaluates to $L/2$. 
+
+A similar analysis allows us to determine that 
+\[ \int_0^L \sin\pqty{\xi n}\sin\pqty{\xi m}\dd x\]
+also equals zero whenever $m\ne n$, and $L/2$ when $m=n$.
+
+To sum up, we have the following three relationships:
+\begin{align*}
+    \int_0^L \sin\pqty{\xi n}\cos\pqty{\xi m}\dd x &= 0 \\
+    \int_0^L \cos\pqty{\xi n}\cos\pqty{\xi m}\dd x &= \frac{L}{2}\delta_{mn} \\
+    \int_0^L \sin\pqty{\xi n}\sin\pqty{\xi m}\dd x &= \frac{L}{2}\delta_{mn}
+\end{align*}
+Where $\delta_{mn}$ is the \textbf{Kronecker delta}--defined as
+\[ \delta_{mn} = \begin{cases}
+    0 & m \ne n \\
+    1 & m =n
+\end{cases}\]
+We typically use the word orthogonal to describe vectors. To be exact, we use the word orthogonal when the dot product of two vectors is zero. We can extend this analysis to functions by extending the idea of a dot product to the more general idea of an \textbf{inner product}. A full analysis on inner products should be left to a linear algebra course, but in short, we can define the inner product of two functions $f: \R \to \C$ and $g: \R \to \C$ on some interval $[a,b]$ as 
+\[ \langle f, g\rangle = \int_a^b fg^* \dd x\]
+Therefore, we have the following relationships holding for any set of natural numbers $n, m$:
+\begin{enumerate}
+    \item $\sin(\xi n)$ and $\cos(\xi m)$ are orthogonal over $[0, L]$.
+    \item $\cos(\xi n)$ and $\cos(\xi m)$ are orthogonal over $[0, L]$ whenever $n\ne m$.
+    \item $\sin(\xi n)$ and $\sin(\xi m)$ are orthogonal over $[0, L]$ whenever $n\ne m$.
+\end{enumerate}
+\subsection*{Calculating the Coefficients}
+Recall that we assumed $f(x)$ could be written in the form
+\[ f(x) = a_0 + \sum_{n\in\N} \bqty{a_n\cos(\xi n) + b_n\sin(\xi n)} \]
+But we never found the values of the coefficients. To find them, we will exploit some of the orthogonality relations. Consider the integral
+\[ \int_0^L f(x) \dd x \]
+We can equivalently write this as
+\begin{align*}
+    \int_0^L \pqty{a_0 + \sum_{n\in\N} \bqty{a_n\cos(\xi n) + b_n\sin(\xi n)}}\dd x
+\end{align*}
+We can then pull the integral inside the sum to rewrite:
+\[ \int_0^L a_0\dd x + \sum_{n\in \N} \bqty{a_n\int_0^L \cos(\xi n)\dd x + b_n\int_0^L \sin(\xi n)\dd x}\]
+But the $\cos(\xi x)$ and $\sin(\xi x)$ terms undergo a whole number of oscillations between $0$ and $L$. So their integrals are zero, and we have
+\[ \int_0^L f(x)\dd x = a_0 L\]
+This gives
+\[ a_0 = \frac{1}{L}\int_0^L f(x)\dd x\]
+Now, let $m$ be a natural number and consider the integral
+\[ \int_0^L f(x) \cos(\xi m)\dd x\]
+We can equivalently write this as 
+\begin{align*}
+    \int_0^L \pqty{a_0 + \sum_{n\in\N} \bqty{a_n\cos(\xi n) + b_n\sin(\xi n)}}\cos(\xi m)\dd x
+\end{align*}
+We can then pull the integral inside the sum and distribute the $\cos(\xi m)$ to write
+\[ \int_0^L a_0\cos(\xi m)\dd x + \sum_{n\in\N} \bqty{a_n \int_0^L \cos(\xi n)\cos(\xi m)\dd x + b_n\int_0^L \sin(\xi n)\cos(\xi m)\dd x}\]
+The $a_0\cos(\xi m)$ term undergoes a whole number of oscillations over $[0,L]$ so its integral is zero, and with the orthogonality relations we found earlier, we have
+\[ \sum_{n\in \N} a_n\frac{L}{2}\delta_{mn} = a_m\frac{L}{2} \]
+Therefore
+\[ \int_0^L f(x)\cos(\xi m)\dd x = a_m\frac{L}{2} \]
+and so
+\[ a_n = \frac{2}{L}\int_0^L f(x)\cos(\xi n)\dd x\]
+where I changed from $m$ to $n$ to make it look nicer. 
+
+We can follow similar reasoning to find
+\[ b_n = \frac{2}{L}\int_0^L f(x)\sin(\xi n)\dd x\]
+In summary, then, we have the coefficients
+\begin{align*}
+    a_0 &= \frac{1}{L}\int_0^L f(x)\dd x \\
+    a_n &= \frac{2}{L}\int_0^L f(x)\cos(\xi n)\dd x \\
+    b_n &= \frac{2}{L}\int_0^L f(x)\sin(\xi n)\dd x
+\end{align*}
+The limits of integration in the above expressions don't actually have to be $0$ and $L$, they can be any two values of $x$ that differ by $L$. For instance, $-L/4$ and $3L/4$ work just as well.  
+\begin{example}
+    Find the Fourier series for the sawtooth function defined by $f(x) = Ax$ for $-L/2 < x < L/2$, which then repeats with period $L$. 
+
+    \textbf{Solution:} Since $f$ is an odd function, all of the $a_n$ terms go to zero when integrated from $-L/2$ to $L/2$. So we just need to find the $b_n$ coefficients. We have
+    \begin{align*}
+        b_n &= \frac{2}{L}\int_{-L/2}^{L/2} f(x)\sin(\xi n)\dd x \\
+        &= \frac{2}{L}\int_{-L/2}^{L/2} Ax\sin\pqty{\frac{2\pi nx}{L}}\dd x \\
+        &= \frac{2A}{L}\pqty{-\frac{xL}{2\pi n}\cos\pqty{\frac{2\pi nx}{L}}\biggr|_{-L/2}^{L/2} + \frac{L}{2\pi n}\int_{-L/2}^{L/2}\cos\pqty{\frac{2\pi nx}{L}}\dd x} \\
+        \intertext{The right term goes away since it's a $\cos$ integrated over a single period, so}
+        b_n &= \frac{A}{\pi n}\pqty{-x\cos\pqty{\frac{2\pi nx}{L}}}_{-L/2}^{L/2} \\
+        &= \frac{A}{\pi n}\pqty{-\frac{L}{2}\cos(\pi n) - \frac{L}{2}\cos(\pi n)} = -\frac{AL}{\pi n}\cos(\pi n)
+    \end{align*}
+    But $\cos(\pi n) = (-1)^n$, so
+    \[ b_n = \frac{AL}{\pi n}(-1)^{n+1}\]
+    Thus, we have
+    \[ f(x) = \frac{AL}{\pi}\sum_{n\in\N} \pqty{(-1)^{n+1}\frac{1}{n}\sin\pqty{\frac{2\pi nx}{L}}}\]
+    The more terms we include in this approximation, the better it becomes. However, we do find an interesting artifact. Even with a large number of terms, the approximation overshoots the function at the discontinuity. This is known as the \textbf{Gibbs phenomenon}. 
+\end{example}
+\section{Fourier Exponential Series}
+Any function that can be written in terms of sines and cosines can also be written in terms of exponentials. We assume the form
+\[ f(x) = \sum_{n\in\Z}  C_n e^{i2\pi nx/L} \]
+Notice that this sum runs over all of the integers, not just the natural numbers.
+
+Defining $\xi$ as before, we can write
+\[ f(x) = \sum_{n\in\Z} C_ne^{i\xi n}\]
+To find the coefficients, consider the inner product over $[0,L]$:
+\[ \langle e^{i\xi n}, e^{i\xi m}\rangle = \int_0^L e^{i\xi n}e^{-i\xi m}\dd x \]
+Remember that we take the conjugate of the second term, which is where the factor of $-1$ comes from.
+
+To start, assume $m = n$ and we find that
+\[ e^{i\xi n}e^{-i\xi m} = e^0 = 1 \]
+which then yields
+\[ \int_0^L e^{i\xi n}e^{-i\xi m}\dd x = L \]
+Now, assume $m\ne n$ and write
+\begin{align*}
+    \langle e^{i\xi n}, e^{i\xi m}\rangle &= \int_0^L e^{i\xi(m-n)}\dd x \\
+    &= \frac{L}{2\pi i(m-n)}e^{i\xi(m-n)}\biggr|_{x=0}^{x=L} \\
+    &= \frac{L}{2\pi i(m-n)}\pqty{e^{2i\pi (m-n)} - e^0}\dd x = 0
+\end{align*}
+Therefore, we have
+\[ \langle e^{i\xi n}, e^{i\xi m}\rangle = L\delta_{mn} \]
+Now, considering the integral
+\[ \int_0^L f(x) e^{-i\xi m}\dd x\]
+we can equivalently write
+\begin{align*}
+    \int_0^L f(x)e^{-i\xi m}\dd x &= \int_0^L \pqty{\sum_{n\in\Z}C_ne^{i\xi n}}e^{-i\xi m}\dd x \\
+    &= \sum_{n\in\Z} C_n\int_0^L e^{i\xi n}e^{-i\xi m}\dd x \\
+    &= \sum_{n\in\Z} LC_n\delta_{m,n} = LC_m
+\end{align*}
+And therefore
+\[ C_n = \frac{1}{L}\int_0^L f(x)e^{-i\xi n}\dd x\]
+\begin{example}
+    Find the Fourier exponential series for the same function as the previous example.
+
+    \textbf{Solution:} We first calculate the coefficients with $n\ne 0$ as
+    \begin{align*}
+        C_n &= \frac{1}{L}\int_{-L/2}^{L/2} f(x)e^{i\xi n}\dd x \\
+        &= \frac{1}{L} \int_{-L/2}^{L/2} Axe^{i\xi n}\dd x \\
+        &= \frac{A}{L} \pqty{\frac{L}{2\pi i n}xe^{i\xi n}\biggr|_{-L/2}^{L/2} - \frac{L}{2\pi i n}\int_{-L/2}^{L/2} e^{i\xi n}\dd x} \\
+        &= \frac{A}{2\pi in}\pqty{xe^{2\pi inx/L}- \frac{L}{2\pi in}e^{2\pi inx/L}}_{-L/2}^{L/2}
+    \end{align*}
+    Noting that $e^{\pi i n} = -(-1)^n$ and $e^{-\pi in} = -(-1)^n$, the right term goes to zero and the left term gives
+    \[ C_n = \frac{iAL}{\pi n}(-1)^n \quad(n\ne 0)\]
+    Now, for $n=0$ we see that 
+    \[ C_0 = \frac{1}{L}\int_{-L/2}^{L/2} f(x)\dd x\]
+    But since $f$ is odd, this integral is just zero. Thus, the Fourier series for $f$ is given by
+    \[ f(x) = \sum_{n\in\Z\setminus\{0\} } \frac{iAL}{\pi n}(-1)^n e^{2\pi inx/L} \]
+\end{example}
+In summary then, every periodic function with period $L$ can be written as
+\[ f(x) = \sum_{n\in\Z} C_ne^{2\pi inx/L} \]
+with
+\[ C_n = \frac{1}{L}\int_0^L f(x)e^{-2\pi in x/L}\dd x\]
+\subsection*{Special Cases}
+If a function $f(x)$ is real, we see that
+\[ C_{-n} = \frac{1}{L}\int_0^L f(x)e^{2\pi inx/L}\dd x = \frac{1}{L} \int_0^L f(x)\pqty{e^{-2\pi inx/L}}^*\dd x = C_n^*\]
+So $C_{-n} = C_n^*$.
+
+If $f(x)$ is purely imaginary, we have
+\[ C_{-n} = \frac{1}{L}\int_0^L f(x)e^{2\pi inx/L}\dd x = \frac{1}{L} \int_0^L -f(x)\pqty{e^{-2\pi inx/L}}^*\dd x = -C_n^* \]
+So $C_{-n} = -C_n^*$.
+
+Concerning even/odd-ness, 
+\begin{enumerate}
+    \item If $f(x)$ is an even function of $x$, we have $C_n = C_{-n}$. If $f(x)$ is also real, this tells us that every $C_n$ is purely real. If $f(x)$ is purely imaginary, this tells us that every $C_n$ is purely imaginary.
+    \item If $f(x)$ is an odd functoin of $x$, we have $C_n = -C_{-n}$. If $f(x)$ is also real, this tells us that every $C_n$ is purely imaginary. If $f(x)$ is purely imaginary, this tells us that every $C_n$ is purely real.
+\end{enumerate}
+\section{Fourier Transforms}
+Now, we draw our attention to functions that are not periodic. The key observation is that we can consider a nonperiodic function to be periodic on $[-L/2, L/2]$ with $L\to \infty$. This may sound like cheating, but it is a perfectly valid thing to do. We will work with exponential series here, but the derivation for trigonometric series is similar.
+
+Our starting point will be 
+\[ f(x) = \sum_{n\in\Z} C_ne^{i2\pi nx/L} \quad\text{and}\quad C_n = \int_{-L/2}^{L/2} f(x)e^{-i2\pi nx/L}\dd x\]
+We can define the constant $k_n \equiv 2\pi n/L$. Then, the difference between $k$ values for successive $n$ values is $\Delta k_n = (2\pi/L)\Delta n$. We also have $\Delta n = 1$, so we can rewrite our $f(x)$ as
+\begin{align*}
+    f(x) &= C_n e^{ik_n x}\Delta n \\
+    &= C_ne^{ik_nx} \pqty{\frac{L}{2\pi }\Delta k_n} \\
+    &= \pqty{\frac{L}{2\pi}C_n}e^{ik_nx}\Delta k_n
+\end{align*}
+In the limit as $L\to \infty$, $\Delta k_n$ gets small so we essentially have an integral,
+\[ f(x) = \int_\R \pqty{\frac{L}{2\pi}C_n}e^{ik_nx} \dd k_n\]
+The $L$ in the numerator might seem like a problem, but it actually isn't. Notice that the $C_n$s shrink with $1/L$, so these cancel out. We will now do a small rewrite. Define $C(k_n) \equiv (L/2\pi) C_n$.Then,
+\begin{align*}
+    C(k_n) &= \frac{L}{2\pi} \cdot \frac{1}{L} \int_{-L/2}^{L/2} f(x)e^{-ik_nx}\dd x \\
+    &= \frac{1}{2\pi}\int_{-\infty}^\infty f(x)e^{-ik_nx}\dd x
+\end{align*}
+We can now drop the index $n$ since we have transferred to a continuum, and we will also relabel $C(k) = \hat f(k)$. So, we have
+\[ f(x) = \int_{-\infty}^\infty \hat f(k)e^{ikx}\dd k\quad\text{and}\quad \hat f(k) = \frac{1}{2\pi}\int_{-\infty}^\infty f(x)e^{-ikx}\dd x\]
+$\hat f(k)$ is called the \textbf{Fourier transform} of $f(x)$.
+
+The Fourier transform $\hat f(k)$ exists in the \textbf{wavenumber domain}, and $f(x)$ exists in the \textbf{position domain}, and $\hat f(k)$ indicates how much $f(x)$ is made up of $e^{ikx}$. 
+
+We can also analyze this in the other direction, $f(x)$ is called the \textbf{inverse Fourier transform} of $\hat f(k)$, and $f(x)$ indicates how much $\hat f(k)$ is made up of $e^{-ikx}$. 
+
+Of course, except for special cases, essentially \textbf{none} of $f(x)$ is made up of each individual $e^{ikx}$, since $k$ exists in a continuum. Instead, we think about how much $f(x)$ is made up of the wavenumbers lying between $k$ and $k+\dd k$. That is, approximately $\hat f(k)\dd k$ of the function $f(x)$ is made up of the $e^{ikx}$ terms between $k$ and $k+\dd k$.
+
+Sometimes, the equivalent forms
+\[ f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(k)e^{ikx}\dd k \quad\text{and}\quad \hat f(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x)e^{-ikx}\dd x\]
+or
+\[ f(x) = \int_{\infty}^\infty \hat f(k)e^{2\pi ikx} \dd k \quad\text{and}\quad \hat f(k) = \int_{-\infty}^\infty f(x)e^{-2\pi ikx}\dd x\]
+are used. In this last form, we are working in the wavelength and position domain, rather than the wavenumber and position domain.
+\begin{example}
+    Find the Fourier transform of the non periodic step function where 
+    \[ f(x) = \begin{cases}
+        0 & x < -L/2 \\
+        -1 & -L/2 \le  x < 0 \\
+        1 & 0 < x \le L/2 \\
+        0 & x > L/2
+    \end{cases}\]
+    We can compute the Fourier transform to be
+    \[ \hat f(k) = \frac{1}{2\pi} \int_{-\infty}^\infty f(x)e^{-ikx}\dd x\]
+    We can split this into two integrals (technically four, but the ones where $f(x) =0$ are just $0$),
+    \begin{align*}
+        \hat f(k) &= -\frac{A}{2\pi}\int_{-L/2}^{L/2} e^{-ikx}\dd x + \frac{A}{2\pi}\int_{0}^{L/2} e^{-ikx} \dd x \\
+        &= \frac{A}{2ik \pi }e^{-ikx}\biggr|_{-L/2}^{0} - \frac{A}{2i k\pi}e^{-ikx}\biggr|_{0}^{L/2} \\
+        &= -\frac{Ai}{2k\pi} + \frac{Ai}{2k \pi}e^{-ikL/2} + \frac{Ai}{2k\pi}e^{ikL/2} - \frac{Ai}{2k\pi} \\
+        &= \frac{A}{2k\pi}\bqty{-2+i\pqty{e^{-ikL/2} + e^{ikL/2}}} \\
+        &= -\frac{Ai}{k\pi}\pqty{1-\cos\pqty{\frac{kL}{2}}}
+    \end{align*}
+    So our expression for $f(x)$ is
+    \[ f(x) = -\frac{Ai}{\pi} \int_{-\infty}^\infty \frac{1}{k}\pqty{1-\cos\pqty{\frac{kL}{2}}}e^{ikx}\dd k\]
+    
+\end{example}
